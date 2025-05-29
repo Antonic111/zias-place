@@ -1,54 +1,54 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #111111;
-  color: #f0f0f0;
+  background: #222; /* Main page background */
+  color: #fff;      /* All text white */
+  font-size: 18px;  /* Larger base font size */
 }
-
 header {
-  background: #1a1a1a;
-  color: #ff4d4d;
+  background: #111; /* Darker black behind title */
+  color: white;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
-
 nav {
-  background: #2a2a2a;
+  background: #333; /* Darker than main background but lighter than header */
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
+  font-size: 1.25rem;
 }
-
 nav a {
-  color: #f0f0f0;
+  color: white;
   text-decoration: none;
-  margin: 0 1rem;
-  font-weight: bold;
-  transition: color 0.2s;
+  margin: 0 1.5rem;
+  font-weight: 600;
 }
-
 nav a:hover {
-  color: #ff4d4d;
+  opacity: 0.7;
 }
-
 main {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1.5rem;
+  font-size: 1.125rem; /* Slightly bigger text */
+  line-height: 1.6;
 }
-
 h2 {
-  color: #ff4d4d;
+  color: #eee; /* Slightly lighter white for headings */
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
-
 ul {
   list-style: square;
-  padding-left: 1.5rem;
+  padding-left: 2rem;
 }
-
 footer {
-  background: #1a1a1a;
-  color: #ff4d4d;
+  background: #333;
+  color: #ccc;
   text-align: center;
-  padding: 1rem;
+  padding: 1.2rem;
+  font-size: 1rem;
 }
