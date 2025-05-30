@@ -431,13 +431,15 @@ footer {
     gap: 0.5rem;
   }
 
-  .gallery img {
-    max-width: 80vw;            /* Large enough, but not too wide */
-    height: auto;
-    flex-shrink: 0;
-    object-fit: cover;
-    scroll-snap-align: center;
-    border-radius: 8px;
-  }
+.gallery img {
+  aspect-ratio: 4 / 3;         /* Force landscape ratio */
+  max-width: 85vw;             /* Fits nicely on screen */
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-radius: 8px;
+  scroll-snap-align: center;
+}
+
 }
 
