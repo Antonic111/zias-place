@@ -7,13 +7,12 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<div class="page-wrapper">
-<header>
-  <div class="container">
-    <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
-    <h1>Authentic Italian Meals Made with Love.</h1>
-  </div>
-</header>
+  <header>
+    <div class="container">
+      <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
+      <h1>Authentic Italian Meals Made with Love.</h1>
+    </div>
+  </header>
 
 <nav>
   <div class="nav-container">
@@ -24,7 +23,8 @@
   </div>
 </nav>
 
-  <main>
+  <div class="page-wrapper">
+    <main>
     <h2>Our Menu</h2>
     <hr>
     <ul>
@@ -51,7 +51,8 @@
         <button class="carousel-btn right">&#10095;</button>
       </div>
     </section>
-  </main>
+    </main>
+  </div>
 
   <footer>
     <div class="footer-inline">
@@ -61,7 +62,7 @@
       <p>email@example.com</p>
     </div>
   </footer>
-</div>
+</body>
 
 <script>
 const track = document.querySelector('.carousel-track');
@@ -154,6 +155,22 @@ document.querySelector('.carousel-btn.right').addEventListener('click', () => {
       main.classList.add('visible');
     }
   });
+</script>
+<button id="backToTop" title="Back to top">&#8679;</button>
+<script>
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+});
 </script>
 </body>
 </html>
