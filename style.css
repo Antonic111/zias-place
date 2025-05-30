@@ -200,6 +200,14 @@ header h1 {
   text-align: center;
 }
 
+.gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .carousel-wrapper {
   position: relative;
   max-width: 900px;
@@ -272,9 +280,9 @@ header h1 {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  font-size: 26px;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
   transition: opacity 0.4s ease;

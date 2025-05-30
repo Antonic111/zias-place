@@ -73,6 +73,7 @@
     </div>
   </footer>
 </body>
+
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname.split('/').pop();
@@ -86,6 +87,7 @@
     });
   });
 </script>
+
 <button id="backToTop" title="Back to top">&#8679;</button>
 <script>
 const backToTopButton = document.getElementById("backToTop");
@@ -102,6 +104,7 @@ backToTopButton.addEventListener("click", () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 });
 </script>
+
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const main = document.querySelector('main');
@@ -111,6 +114,27 @@ backToTopButton.addEventListener("click", () => {
   });
 </script>
 
+<script>
+const backToTopBtn = document.getElementById("backToTop");
+const footer = document.querySelector("footer");
+
+function positionBackToTop() {
+  const footerRect = footer.getBoundingClientRect();
+  const btn = backToTopBtn;
+
+  // Push the button up if the footer is visible
+  if (footerRect.top < window.innerHeight) {
+    const overlap = window.innerHeight - footerRect.top;
+    btn.style.bottom = `${30 + overlap}px`;
+  } else {
+    btn.style.bottom = "30px";
+  }
+}
+
+window.addEventListener("scroll", positionBackToTop);
+window.addEventListener("resize", positionBackToTop);
+positionBackToTop(); // Call on load too
+</script>
 
 </body>
 </html>
