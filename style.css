@@ -196,15 +196,26 @@ header h1 {
 }
 
 .gallery-section {
-  margin-top: 40px;
-  text-align: center;
+  overflow-x: auto;
+  padding: 0 1rem;
+}
+
+.gallery {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
 }
 
 .gallery img {
-  width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  width: auto;
+  max-width: 80vw; /* Adjust as needed */
+  max-height: 40vh; /* Keeps images from getting too tall */
   object-fit: cover;
+  flex-shrink: 0;
+  scroll-snap-align: start;
   border-radius: 8px;
 }
 
@@ -407,5 +418,15 @@ footer {
 
   footer p {
     font-size: 0.9rem;
+  }
+    .gallery {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: visible;
+  }
+
+  .gallery img {
+    max-width: 280px;
+    height: auto;
   }
 }
