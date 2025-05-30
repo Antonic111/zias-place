@@ -292,103 +292,36 @@ main {
 
 /* Mobile Responsive Styles */
 @media (max-width: 600px) {
-  /* Page wrapper: allow some padding so content doesn't hug edges */
+  /* Scale down the base font size for the whole page */
+  body, 
+  html, 
   .page-wrapper {
-    width: 95%;
-    max-width: 900px;
-    margin: 1rem auto;
-    padding: 0 10px;
+    font-size: 14px;  /* smaller base font size on mobile */
   }
 
-  /* Header adjustments */
-  header {
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  header .logo {
-    width: 100%;
-    max-width: 250px;  /* restrict size */
-    height: auto;
-    display: block;
-    margin: 0 auto 0.5rem;
-  }
-
+  /* Headings - scale them down relative to base font size */
   header h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    padding: 0 5px;
-    line-height: 1.2;
+    font-size: 1.4rem; /* about 20px */
   }
 
-  /* Navigation adjustments */
-  .nav-container {
-    width: 100%;
-    padding: 0 5px;
+  main h2 {
+    font-size: 1.3rem; /* about 18px */
+  }
+
+  main h3 {
+    font-size: 1.1rem; /* about 15px */
+  }
+
+  p {
+    font-size: 0.9rem; /* about 13px */
+    line-height: 1.4; /* better line height for readability */
   }
 
   nav a {
-    font-size: 1rem;
-    padding: 10px 6px;
-    flex: none;
-    min-width: 0;
+    font-size: 1rem; /* about 14px */
   }
 
-  /* Main content and welcome rows stack */
-  main {
-    padding: 0 5px;
-  }
-
-  .welcome-row {
-    display: flex !important; /* ensure flex */
-    flex-direction: column !important;
-    align-items: center;
-    text-align: center;
-    padding: 10px 0;
-  }
-
-  .welcome-row img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-  }
-
-  .welcome-text {
-    padding: 0 10px;
-  }
-
-  .welcome-text h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .welcome-text p {
-    font-size: 0.95rem;
-  }
-
-  /* Footer adjustments */
-  footer .footer-inline {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  footer .footer-inline img {
-    width: 24px;
-    height: auto;
-  }
-
-  footer .footer-inline p {
+  footer p {
     font-size: 0.9rem;
-  }
-
-  /* Back to top button smaller and closer */
-  #backToTop {
-    right: 10px;
-    bottom: 20px;
-    padding: 10px 14px;
-    font-size: 20px;
   }
 }
