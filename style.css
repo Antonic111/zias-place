@@ -1,23 +1,28 @@
+
+
+/* FONT + COLOR SETTINGS */
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background: #222; /* Main page background */
-  color: #fff;      /* All text white */
-  font-size: 18px;  /* Larger base font size */
+  background-image: linear-gradient(to top, #333, #111);
+  color: #fff;       /* white text */
+  font-size: 18px;
 }
-header {
-  background: #111; /* Darker black behind title */
-  color: white;
-  text-align: center;
-  padding: 3rem 1rem;
-  font-size: 2.5rem;
-  font-weight: bold;
+
+/* LOGO */
+.logo {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  margin: 2rem auto 1rem auto;
 }
+
+/* NAVIGATION */
 nav {
-  background: #333; /* Darker than main background but lighter than header */
+  background: #333;
   display: flex;
   justify-content: center;
-  padding: 1.2rem 0;
+  padding: 1rem 0;
   font-size: 1.25rem;
 }
 nav a {
@@ -29,26 +34,107 @@ nav a {
 nav a:hover {
   opacity: 0.7;
 }
+
+/* MAIN CONTENT */
 main {
   max-width: 900px;
   margin: auto;
   padding: 2.5rem 1.5rem;
-  font-size: 1.125rem; /* Slightly bigger text */
+  font-size: 1.5rem;
   line-height: 1.6;
 }
+
+/* HEADINGS */
 h2 {
-  color: #eee; /* Slightly lighter white for headings */
-  font-size: 2rem;
+  color: #eee;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
+
+/* LISTS */
 ul {
   list-style: square;
   padding-left: 2rem;
 }
+
+/* FOOTER */
 footer {
-  background: #333;
+  background: #111;
   color: #ccc;
   text-align: center;
   padding: 1.2rem;
   font-size: 1rem;
+}
+.footer-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  flex-wrap: wrap; /* Allows it to wrap if screen is too narrow */
+}
+
+.footer-inline img {
+  width: 35px;
+  height: auto;
+}
+
+/* HEADER SECTION */
+header {
+  background: #111;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.logo {
+  max-width: 500px; /* Resize logo */
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+}
+
+header h1 {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: white;
+  margin: 0;
+}
+.welcome-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2.5rem 0;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.welcome-row-reverse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2.5rem 0;
+  gap: 2rem;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+}
+
+.welcome-row img,.welcome-row-reverse img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.welcome-text {
+  flex: 1;
+  color: white;
+  font-size: 1.125rem;
+}
+
+.welcome-text h3 {
+  font-size: 1.5rem;
+  color: #eee;
+  margin-bottom: 0.5rem;
 }
