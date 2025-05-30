@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - Zia's Place</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -14,90 +14,90 @@
     </div>
   </header>
 
-<nav>
-  <div class="nav-container">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
-    <a href="about.html">About</a>
-    <a href="contact.html" class="active">Contact</a>
-  </div>
-</nav>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+  </nav>
+
   <div class="page-wrapper">
     <main>
-    <h2>Contact Us</h2>
-	<hr>
-    <p>Phone: (555) 123-4567</p>
-    <p>Email: catering@ziasplace.com</p>
+      <h2>Contact Us</h2>
+      <hr />
+      <p>Phone: (555) 123-4567</p>
+      <p>Email: catering@ziasplace.com</p>
     </main>
   </div>
+
   <footer>
     <div class="footer-inline">
-      <img src="images/phone.png" alt="phone">
+      <img src="images/phone.png" alt="phone" />
       <p>(555) 647-5454</p>
-      <img src="images/email.png" alt="email">
+      <img src="images/email.png" alt="email" />
       <p>email@example.com</p>
     </div>
   </footer>
-</body>
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname.split('/').pop();
-    const links = document.querySelectorAll('nav a');
-    links.forEach(link => {
-      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
+
+  <button id="backToTop" title="Back to top">&#8679;</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Highlight active nav link based on current path
+      const path = window.location.pathname.split('/').pop();
+      const links = document.querySelectorAll('nav a');
+      links.forEach(link => {
+        if (
+          link.getAttribute('href') === path ||
+          (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
+        ) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Make main visible with animation
+      const main = document.querySelector('main');
+      if (main) main.classList.add('visible');
+
+      // Back to top button logic
+      const backToTopButton = document.getElementById("backToTop");
+      const footer = document.querySelector("footer");
+
+      // Show/hide back to top button based on scroll position
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+        positionBackToTop();
+      });
+
+      // Scroll smoothly to top on button click
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+
+      // Adjust back to top button position if footer is visible
+      function positionBackToTop() {
+        const footerRect = footer.getBoundingClientRect();
+        if (footerRect.top < window.innerHeight) {
+          const overlap = window.innerHeight - footerRect.top;
+          backToTopButton.style.bottom = `${30 + overlap}px`;
+        } else {
+          backToTopButton.style.bottom = "30px";
+        }
       }
+
+      window.addEventListener("resize", positionBackToTop);
+
+      // Initial call to position button correctly on page load
+      positionBackToTop();
     });
-  });
-</script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const main = document.querySelector('main');
-    if(main) {
-      main.classList.add('visible');
-    }
-  });
-</script>
-<button id="backToTop" title="Back to top">&#8679;</button>
-<script>
-const backToTopButton = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
-  }
-});
-
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-});
-</script>
-
-<script>
-const backToTopBtn = document.getElementById("backToTop");
-const footer = document.querySelector("footer");
-
-function positionBackToTop() {
-  const footerRect = footer.getBoundingClientRect();
-  const btn = backToTopBtn;
-
-  // Push the button up if the footer is visible
-  if (footerRect.top < window.innerHeight) {
-    const overlap = window.innerHeight - footerRect.top;
-    btn.style.bottom = `${30 + overlap}px`;
-  } else {
-    btn.style.bottom = "30px";
-  }
-}
-
-window.addEventListener("scroll", positionBackToTop);
-window.addEventListener("resize", positionBackToTop);
-positionBackToTop(); // Call on load too
-</script>
-
+  </script>
 </body>
 </html>

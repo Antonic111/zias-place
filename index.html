@@ -24,43 +24,42 @@
   </nav>
   <div class="page-wrapper">
     <main>
-  <h2>Welcome to Zia's Place!</h2>
-  <hr>
-  <p>We’re proud to offer homemade Italian catering made with passion and authentic recipes, 
-  perfect for any family gathering or special event. From intimate dinners to festive feasts, 
-  we bring the true flavors of Italy to your table. Let us handle the food, so you can enjoy 
-  every moment with your loved ones, sharing meals just like Zia used to make.</p>
- 
-<hr>
+      <h2>Welcome to Zia's Place!</h2>
+      <hr>
+      <p>We’re proud to offer homemade Italian catering made with passion and authentic recipes, 
+      perfect for any family gathering or special event. From intimate dinners to festive feasts, 
+      we bring the true flavors of Italy to your table. Let us handle the food, so you can enjoy 
+      every moment with your loved ones, sharing meals just like Zia used to make.</p>
+     
+      <hr>
 
-<section class="welcome-row">
-  <div class="welcome-text">
-    <h3>Authentic Flavors</h3>
-    <p>Experience the rich, traditional taste of our handcrafted Italian recipes.</p>
-  </div>
-  <img src="images/Italian Dish 1.jpg" alt="Italian Dish 1">
-</section>
+      <section class="welcome-row">
+        <div class="welcome-text">
+          <h3>Authentic Flavors</h3>
+          <p>Experience the rich, traditional taste of our handcrafted Italian recipes.</p>
+        </div>
+        <img src="images/Italian Dish 1.jpg" alt="Italian Dish 1">
+      </section>
 
-<hr>
+      <hr>
 
-<section class="welcome-row">
-  <img src="images/Italian Dish 2.jpg" alt="Italian Dish 2"> <!-- image first -->
-  <div class="welcome-text">
-    <h3>Fresh Ingredients</h3>
-    <p>We use only the freshest local ingredients to ensure quality in every bite.</p>
-  </div>
-</section>
+      <section class="welcome-row">
+        <img src="images/Italian Dish 2.jpg" alt="Italian Dish 2">
+        <div class="welcome-text">
+          <h3>Fresh Ingredients</h3>
+          <p>We use only the freshest local ingredients to ensure quality in every bite.</p>
+        </div>
+      </section>
 
-<hr>
+      <hr>
 
-<section class="welcome-row">
-  <div class="welcome-text">
-    <h3>Made With Love</h3>
-    <p>Every dish is prepared with care as if we were cooking for family.</p>
-  </div>
-  <img src="images/Italian Dish 3.png" alt="Italian Dish 3">
-</section>
-
+      <section class="welcome-row">
+        <div class="welcome-text">
+          <h3>Made With Love</h3>
+          <p>Every dish is prepared with care as if we were cooking for family.</p>
+        </div>
+        <img src="images/Italian Dish 3.png" alt="Italian Dish 3">
+      </section>
     </main>
   </div>
 
@@ -72,69 +71,59 @@
       <p>email@example.com</p>
     </div>
   </footer>
-</body>
+
+  <button id="backToTop" aria-label="Back to top" title="Back to top">&#8679;</button>
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Highlight active nav link
     const path = window.location.pathname.split('/').pop();
     const links = document.querySelectorAll('nav a');
     links.forEach(link => {
-      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+      if (
+        link.getAttribute('href') === path ||
+        (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
+      ) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
       }
     });
-  });
-</script>
 
-<button id="backToTop" title="Back to top">&#8679;</button>
-<script>
-const backToTopButton = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
-  }
-});
-
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-});
-</script>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
+    // Animate main content visibility
     const main = document.querySelector('main');
-    if(main) {
-      main.classList.add('visible');
+    if (main) main.classList.add('visible');
+
+    // Back to Top button setup
+    const backToTopButton = document.getElementById("backToTop");
+    const footer = document.querySelector("footer");
+
+    function positionBackToTop() {
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        backToTopButton.style.bottom = `${30 + overlap}px`;
+      } else {
+        backToTopButton.style.bottom = "30px";
+      }
     }
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+      positionBackToTop();
+    });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("resize", positionBackToTop);
+    positionBackToTop();
   });
-</script>
-
-<script>
-const backToTopBtn = document.getElementById("backToTop");
-const footer = document.querySelector("footer");
-
-function positionBackToTop() {
-  const footerRect = footer.getBoundingClientRect();
-  const btn = backToTopBtn;
-
-  // Push the button up if the footer is visible
-  if (footerRect.top < window.innerHeight) {
-    const overlap = window.innerHeight - footerRect.top;
-    btn.style.bottom = `${30 + overlap}px`;
-  } else {
-    btn.style.bottom = "30px";
-  }
-}
-
-window.addEventListener("scroll", positionBackToTop);
-window.addEventListener("resize", positionBackToTop);
-positionBackToTop(); // Call on load too
-</script>
-
+  </script>
 </body>
 </html>

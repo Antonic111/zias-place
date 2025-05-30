@@ -14,43 +14,43 @@
     </div>
   </header>
 
-<nav>
-  <div class="nav-container">
-    <a href="index.html">Home</a>
-    <a href="menu.html" class="active">Menu</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</nav>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html">Home</a>
+      <a href="menu.html" class="active">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
 
   <div class="page-wrapper">
     <main>
-    <h2>Our Menu</h2>
-    <hr>
-    <ul>
-      <li>Spaghetti & Meatballs</li>
-      <li>Lasagna</li>
-      <li>Chicken Parmesan</li>
-      <li>Eggplant Rollatini</li>
-      <li>Stuffed Shells</li>
-    </ul>
-
-    <section class="gallery-section">
+      <h2>Our Menu</h2>
       <hr>
-      <div class="carousel-wrapper">
-        <button class="carousel-btn left">&#10094;</button>
-        <div class="carousel" id="carousel">
-          <div class="carousel-track">
-            <img src="images/slideshow/food1.png" alt="Spaghetti">
-            <img src="images/slideshow/food2.jpg" alt="Chicken Parmesan">
-            <img src="images/slideshow/food3.png" alt="Pizza">
-            <img src="images/slideshow/food4.jpg" alt="Meatballs">
-            <img src="images/slideshow/food5.png" alt="George">
+      <ul>
+        <li>Spaghetti & Meatballs</li>
+        <li>Lasagna</li>
+        <li>Chicken Parmesan</li>
+        <li>Eggplant Rollatini</li>
+        <li>Stuffed Shells</li>
+      </ul>
+
+      <section class="gallery-section">
+        <hr>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn left" aria-label="Previous slide">&#10094;</button>
+          <div class="carousel" id="carousel">
+            <div class="carousel-track">
+              <img src="images/slideshow/food1.png" alt="Spaghetti">
+              <img src="images/slideshow/food2.jpg" alt="Chicken Parmesan">
+              <img src="images/slideshow/food3.png" alt="Pizza">
+              <img src="images/slideshow/food4.jpg" alt="Meatballs">
+              <img src="images/slideshow/food5.png" alt="Italian Dish">
+            </div>
           </div>
+          <button class="carousel-btn right" aria-label="Next slide">&#10095;</button>
         </div>
-        <button class="carousel-btn right">&#10095;</button>
-      </div>
-    </section>
+      </section>
     </main>
   </div>
 
@@ -62,138 +62,124 @@
       <p>email@example.com</p>
     </div>
   </footer>
-</body>
 
-<script>
-const track = document.querySelector('.carousel-track');
-const slides = track.children;
-let currentIndex = 0;
-let isTransitioning = false;
+  <button id="backToTop" title="Back to top">&#8679;</button>
 
-function moveToSlide(index) {
-  if (isTransitioning) return;
-
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  track.style.transition = 'transform 0.5s ease-in-out';
-  track.style.transform = `translateX(-${index * slideWidth}px)`;
-  isTransitioning = true;
-
-  // Unlock after transition ends
-  setTimeout(() => {
-    isTransitioning = false;
-  }, 500); // Match transition duration
-}
-
-// Auto-advance
-setInterval(() => {
-  if (isTransitioning) return;
-  currentIndex = (currentIndex + 1) % slides.length;
-  moveToSlide(currentIndex);
-}, 6000);
-
-// Touch swipe
-let startX = 0;
-let isDown = false;
-
-track.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-  isDown = true;
-});
-
-track.addEventListener('touchend', e => {
-  if (!isDown || isTransitioning) return;
-  let endX = e.changedTouches[0].clientX;
-  if (endX < startX - 50) currentIndex = (currentIndex + 1) % slides.length;
-  else if (endX > startX + 50) currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  moveToSlide(currentIndex);
-  isDown = false;
-});
-
-// Keyboard arrows
-document.addEventListener('keydown', e => {
-  if (isTransitioning) return;
-  if (e.key === 'ArrowRight') {
-    currentIndex = (currentIndex + 1) % slides.length;
-    moveToSlide(currentIndex);
-  } else if (e.key === 'ArrowLeft') {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    moveToSlide(currentIndex);
-  }
-});
-
-// Click buttons
-document.querySelector('.carousel-btn.left').addEventListener('click', () => {
-  if (isTransitioning) return;
-  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-  moveToSlide(currentIndex);
-});
-
-document.querySelector('.carousel-btn.right').addEventListener('click', () => {
-  if (isTransitioning) return;
-  currentIndex = (currentIndex + 1) % slides.length;
-  moveToSlide(currentIndex);
-});
-
-</script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Navigation active link
     const path = window.location.pathname.split('/').pop();
     const links = document.querySelectorAll('nav a');
     links.forEach(link => {
-      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+      if (
+        link.getAttribute('href') === path ||
+        (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
+      ) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
       }
     });
-  });
-</script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
+
+    // Animate main content
     const main = document.querySelector('main');
-    if(main) {
-      main.classList.add('visible');
+    if (main) main.classList.add('visible');
+
+    // Carousel setup
+    const track = document.querySelector('.carousel-track');
+    const slides = track.children;
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    function moveToSlide(index) {
+      if (isTransitioning) return;
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      track.style.transition = 'transform 0.5s ease-in-out';
+      track.style.transform = `translateX(-${index * slideWidth}px)`;
+      isTransitioning = true;
+      setTimeout(() => { isTransitioning = false; }, 500);
     }
+
+    // Auto-advance every 6 seconds
+    setInterval(() => {
+      if (isTransitioning) return;
+      currentIndex = (currentIndex + 1) % slides.length;
+      moveToSlide(currentIndex);
+    }, 6000);
+
+    // Touch swipe
+    let startX = 0;
+    track.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+    track.addEventListener('touchend', e => {
+      if (isTransitioning) return;
+      let endX = e.changedTouches[0].clientX;
+      if (endX < startX - 50) {
+        currentIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(currentIndex);
+      } else if (endX > startX + 50) {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        moveToSlide(currentIndex);
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (isTransitioning) return;
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(currentIndex);
+      } else if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        moveToSlide(currentIndex);
+      }
+    });
+
+    // Button clicks
+    document.querySelector('.carousel-btn.left').addEventListener('click', () => {
+      if (isTransitioning) return;
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      moveToSlide(currentIndex);
+    });
+    document.querySelector('.carousel-btn.right').addEventListener('click', () => {
+      if (isTransitioning) return;
+      currentIndex = (currentIndex + 1) % slides.length;
+      moveToSlide(currentIndex);
+    });
+
+    // Back to Top button
+    const backToTopButton = document.getElementById("backToTop");
+    const footer = document.querySelector("footer");
+
+    function positionBackToTop() {
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        backToTopButton.style.bottom = `${30 + overlap}px`;
+      } else {
+        backToTopButton.style.bottom = "30px";
+      }
+    }
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+      positionBackToTop();
+    });
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("resize", positionBackToTop);
+
+    positionBackToTop();
   });
-</script>
-<button id="backToTop" title="Back to top">&#8679;</button>
-<script>
-const backToTopButton = document.getElementById("backToTop");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
-  }
-});
-
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-});
-</script>
-
-<script>
-const backToTopBtn = document.getElementById("backToTop");
-const footer = document.querySelector("footer");
-
-function positionBackToTop() {
-  const footerRect = footer.getBoundingClientRect();
-  const btn = backToTopBtn;
-
-  // Push the button up if the footer is visible
-  if (footerRect.top < window.innerHeight) {
-    const overlap = window.innerHeight - footerRect.top;
-    btn.style.bottom = `${30 + overlap}px`;
-  } else {
-    btn.style.bottom = "30px";
-  }
-}
-
-window.addEventListener("scroll", positionBackToTop);
-window.addEventListener("resize", positionBackToTop);
-positionBackToTop(); // Call on load too
-</script>
+  </script>
 
 </body>
 </html>

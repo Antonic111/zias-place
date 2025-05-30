@@ -1,8 +1,9 @@
+/* GLOBAL RESET */
 * {
   box-sizing: border-box;
 }
 
-/* RESET + STRUCTURE */
+/* BASE STRUCTURE */
 html, body {
   min-height: 100%;
   margin: 0;
@@ -13,33 +14,54 @@ html, body {
   font-size: 18px;
 }
 
-.page-wrapper, .nav-container {
+.page-wrapper,
+.nav-container,
+.container,
+.footer-inline,
+.footer-content {
   max-width: 900px;
-  width: 90%;       /* or 100%, or 95%, etc */
+  width: 90%;
   margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
+.container {
+  overflow-x: hidden; /* prevent overflow */
+}
+
+/* MAIN CONTENT */
 main {
-  flex: 1; /* Main will grow to fill available space */
+  flex: 1; /* grow to fill available space */
   max-width: 900px;
   margin: auto;
   padding: 2.5rem 1.5rem;
   font-size: 1.5rem;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
 }
 
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FOOTER */
 footer {
   background: #111;
   color: #ccc;
   text-align: center;
-  padding: 1.2rem;
+  padding: 1.2rem 0;
   font-size: 1rem;
   flex-shrink: 0;
+  width: 100%;
 }
 
 .footer-inline {
-  max-width: 900px;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,12 +80,6 @@ footer p {
   font-size: 16px;
 }
 
-.footer-content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0rem 0rem;
-}
-
 /* LOGO */
 .logo {
   max-width: 100%;
@@ -72,26 +88,16 @@ footer p {
   margin: 0 auto 2rem auto;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1rem; /* smaller padding */
-  box-sizing: border-box;
-  overflow-x: hidden; /* prevent overflow */
-}
-
 /* NAVIGATION */
 nav {
   background-color: #222;
-  width: 100%; /* change from 100vw */
+  width: 100%; /* avoid 100vw */
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .nav-container {
-  max-width: 900px;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   padding: 0;
@@ -118,16 +124,16 @@ nav a:hover {
 }
 
 nav a.active {
-  background-color: #222; /* keep the lighter black */
-  border-bottom: 4px solid white; /* change gold to white */
-  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.6); /* white glow */
+  background-color: #222;
+  border-bottom: 4px solid white;
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.6);
   color: white;
   font-weight: 700;
 }
 
 nav a:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6); /* white glow */
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
   background-color: #222;
   color: white;
 }
@@ -150,6 +156,7 @@ header {
   background: #111;
   text-align: center;
   padding: 2rem 1rem;
+  width: 100%;
 }
 
 header h1 {
@@ -195,6 +202,7 @@ header h1 {
   margin-bottom: 0.5rem;
 }
 
+/* GALLERY */
 .gallery-section {
   overflow-x: auto;
   padding: 0 1rem;
@@ -211,19 +219,19 @@ header h1 {
 .gallery img {
   height: auto;
   width: auto;
-  max-width: 80vw; /* Adjust as needed */
-  max-height: 40vh; /* Keeps images from getting too tall */
+  max-width: 80vw;
+  max-height: 40vh;
   object-fit: cover;
   flex-shrink: 0;
   scroll-snap-align: start;
   border-radius: 8px;
 }
 
+/* CAROUSEL */
 .carousel-wrapper {
   position: relative;
   max-width: 900px;
   margin: 2rem auto;
-
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
@@ -231,12 +239,7 @@ header h1 {
 
 .carousel {
   overflow: hidden;
-
   border-radius: 12px;
-}
-
-.carousel {
-  overflow: hidden;
 }
 
 .carousel-track {
@@ -250,11 +253,11 @@ header h1 {
   flex-shrink: 0;
   object-fit: cover;
   max-height: 500px;
-
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
+/* CAROUSEL BUTTONS */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -267,6 +270,7 @@ header h1 {
   cursor: pointer;
   z-index: 10;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .carousel-btn.left {
@@ -281,10 +285,11 @@ header h1 {
   background-color: rgba(0,0,0,0.7);
 }
 
+/* BACK TO TOP BUTTON */
 #backToTop {
   position: fixed;
   bottom: 30px;
-  right: 30px; /* simpler and stable */
+  right: 30px;
   opacity: 0;
   pointer-events: none;
   background-color: #222;
@@ -309,121 +314,74 @@ header h1 {
   background-color: #444;
 }
 
-main {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mobile Responsive Styles */
+/* RESPONSIVE STYLES */
 @media (max-width: 600px) {
-  /* Scale down the base font size for the whole page */
-  body, 
-  html, 
-  .page-wrapper {
-    font-size: 14px;  /* smaller base font size on mobile */
+  /* Base font size downscale */
+  body, html, .page-wrapper {
+    font-size: 14px;
   }
-    .logo {
-    max-width: 90%;    /* shrink logo to fit nicely */
+
+  .logo {
+    max-width: 90%;
     height: auto;
-    margin-bottom: 1rem; /* less bottom margin on mobile */
+    margin-bottom: 1rem;
   }
+
+  header, nav, footer {
+    width: 100%;
+    background-color: #111;
+  }
+
+  .container,
+  .nav-container,
+  .footer-inline {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  nav {
+    background-color: #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
   footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 1rem;
-  flex-shrink: 0;
-}
+    background-color: #111;
+    color: #ccc;
+    text-align: center;
+    padding: 1.2rem 0;
+  }
 
-.footer-inline {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 0 1.5rem;
-}
-
-.footer-inline img {
-  width: 20px;
-  height: auto;
-}
-
-footer p {
-  margin: 0;
-  font-size: 16px;
-}
-header, nav, footer {
-  width: 100%;
-  background-color: #111; /* or #222 for nav, whatever you used */
-}
-
-/* The inner containers to constrain width */
-.container,
-.nav-container,
-.footer-inline {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1.5rem; /* optional horizontal padding */
-}
-
-/* Example: if nav background is #222 */
-nav {
-  background-color: #222;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* footer background */
-footer {
-  background-color: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 1.2rem 0; /* vertical padding */
-}
-
-  /* Headings - scale them down relative to base font size */
+  /* Scale headings & text */
   header h1 {
-    font-size: 1.4rem; /* about 20px */
+    font-size: 1rem;
   }
 
   main h2 {
-    font-size: 1.3rem; /* about 18px */
+    font-size: 1.3rem;
   }
 
   main h3 {
-    font-size: 1.1rem; /* about 15px */
+    font-size: 1.1rem;
   }
 
   p {
-    font-size: 0.9rem; /* about 13px */
-    line-height: 1.4; /* better line height for readability */
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 
   nav a {
-    font-size: 1rem; /* about 14px */
+    font-size: 1rem;
   }
 
   footer p {
     font-size: 0.9rem;
   }
-}
 
-@media (max-width: 600px) {
+  /* Gallery tweaks */
   .gallery {
-    display: flex;
     flex-wrap: nowrap;          /* No wrapping */
     overflow-x: auto;           /* Enable horizontal scroll */
     scroll-snap-type: x mandatory;
@@ -431,15 +389,20 @@ footer {
     gap: 0.5rem;
   }
 
-.gallery img {
-  aspect-ratio: 4 / 3;         /* Force landscape ratio */
-  max-width: 85vw;             /* Fits nicely on screen */
-  height: auto;
-  object-fit: cover;
-  flex-shrink: 0;
-  border-radius: 8px;
-  scroll-snap-align: center;
+  .gallery img {
+    aspect-ratio: 4 / 3;
+    max-width: 85vw;
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 8px;
+    scroll-snap-align: center;
+  }
 }
 
+@media (min-width: 601px) {
+  .logo {
+    max-width: 600px; /* or 200px, tweak as needed */
+    margin-bottom: 2rem;
+  }
 }
-
