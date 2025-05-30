@@ -7,24 +7,55 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<div class="page-wrapper">
 <header>
   <img src="images/logo.png" alt="Zia's Place Logo" class="logo">
   <h1>Authentic Italian Meals Made with Love.</h1>
 </header>
 
-  <nav>
+<nav>
+  <div class="nav-container">
     <a href="index.html">Home</a>
     <a href="menu.html">Menu</a>
     <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+</nav>
   <main>
     <h2>Contact Us</h2>
+	<hr>
     <p>Phone: (555) 123-4567</p>
     <p>Email: catering@ziasplace.com</p>
   </main>
-  <footer>
-    &copy; 2025 Zia's Place. All rights reserved.
-  </footer>
+<footer>
+  <div class="footer-inline">
+    <img src="images/phone.png" alt="phone">
+    <p>(555) 647-5454</p>
+    <img src="images/email.png" alt="email">
+    <p>email@example.com</p>
+  </div>
+</footer>
+  </div>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const main = document.querySelector('main');
+    if(main) {
+      main.classList.add('visible');
+    }
+  });
+</script>
 </body>
 </html>

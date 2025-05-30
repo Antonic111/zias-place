@@ -7,43 +7,79 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<div class="page-wrapper">
 <header>
   <img src="images/logo.png" alt="Zia's Place Logo" class="logo">
   <h1>Authentic Italian Meals Made with Love.</h1>
 </header>
 
-  <nav>
+<nav>
+  <div class="nav-container">
     <a href="index.html">Home</a>
     <a href="menu.html">Menu</a>
-    <a href="about.html">About</a>
+    <a href="about.html" class="active">About</a>
     <a href="contact.html">Contact</a>
-  </nav>
+  </div>
+</nav>
   <main>
     <h2>About Zia's Place</h2>
-    <p style="font-size: 18px;">Hi, I’m Rose – the heart and hands behind Zia’s Place, a home-based catering business serving comforting Italian meals made with love and tradition.
-<br>
-Growing up in a big Italian family, I was always surrounded by the warmth of homemade food. From a young age, I helped raise my two younger brothers while juggling school and chores—that’s where my journey in the kitchen began. Those early experiences helped shape me into the strong, resilient woman I am today.
-<br>
-<br>
-With over 35 years of cooking experience, I’ve decided to turn my passion into a purpose: providing delicious, homemade meals for busy families who deserve a break. After years of working full-time in a high-stress job, I know how hard it can be to put a home-cooked meal on the table. That realization—along with my deep love of cooking—led me to start Zia’s Place. My goal is to help ease some of that daily pressure by offering affordable, comforting home made food.
-<br>
-<br>
-As a proud mom of three grown boys with big appetites, my kitchen has always been a place of laughter, love, and generous meals. And as a 12-year cancer survivor, I’ve learned to embrace life fully and follow my passion.
-<br>
-<br>
-At Zia’s Place, you’ll find traditional Italian dishes made with heart, plus a few inspired creations born from my love of experimenting and sharing joy through food. Every meal is prepared with the same care and love I give my own family.
-<br>
-<br>
-Thank you for supporting a small business built on tradition, strength, and heart. I look forward to cooking for you!
-<br>
-<br>
-With warmth,
-<br>
-<br>
-Rose - Zia’s Place</p>
+	<hr>
+    <p style="font-size: 18px;">Hi, I’m Rose – the heart and hands behind Zia’s Place, a home-based catering 
+	business serving comforting Italian meals made with love and tradition.</p>
+
+<p style="font-size: 18px;">Growing up in a big Italian family, I was always surrounded by the warmth of homemade food. 
+From a young age, I helped raise my two younger brothers while juggling school and chores—that’s 
+where my journey in the kitchen began. Those early experiences helped shape me into the strong, 
+resilient woman I am today.</p>
+
+<p style="font-size: 18px;">With over 35 years of cooking experience, I’ve decided to turn my passion into a purpose: providing 
+delicious, homemade meals for busy families who deserve a break. After years of working full-time in a 
+high-stress job, I know how hard it can be to put a home-cooked meal on the table. That realization—along with 
+my deep love of cooking—led me to start Zia’s Place. My goal is to help ease some of that daily pressure by offering 
+affordable, comforting home made food.</p>
+
+<p style="font-size: 18px;">As a proud mom of three grown boys with big appetites, my kitchen has always been a place of laughter, love, 
+and generous meals. And as a 12-year cancer survivor, I’ve learned to embrace life fully and follow my passion.</p>
+
+<p style="font-size: 18px;">At Zia’s Place, you’ll find traditional Italian dishes made with heart, plus a few inspired creations born 
+from my love of experimenting and sharing joy through food. Every meal is prepared with the same care and love 
+I give my own family.</p>
+
+<p style="font-size: 18px;">Thank you for supporting a small business built on tradition, strength, and heart. I look forward to cooking for you!</p>
+
+<p style="font-size: 18px;">With warmth,</p>
+
+<p style="font-size: 18px;">Rose - Zia’s Place</p>
   </main>
-  <footer>
-    &copy; 2025 Zia's Place. All rights reserved.
-  </footer>
+<footer>
+  <div class="footer-inline">
+    <img src="images/phone.png" alt="phone">
+    <p>(555) 647-5454</p>
+    <img src="images/email.png" alt="email">
+    <p>email@example.com</p>
+  </div>
+</footer>
+  </div>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const main = document.querySelector('main');
+    if(main) {
+      main.classList.add('visible');
+    }
+  });
+</script>
 </body>
 </html>

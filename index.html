@@ -7,19 +7,23 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<div class="page-wrapper">
 <header>
   <img src="images/logo.png" alt="Zia's Place Logo" class="logo">
   <h1>Authentic Italian Meals Made with Love.</h1>
 </header>
 
-  <nav>
-    <a href="index.html">Home</a>
+<nav>
+  <div class="nav-container">
+    <a href="index.html" class="active">Home</a>
     <a href="menu.html">Menu</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-  </nav>
+  </div>
+</nav>
 <main>
   <h2>Welcome to Zia's Place!</h2>
+  <hr>
   <p>We’re proud to offer homemade Italian catering made with passion and authentic recipes, 
   perfect for any family gathering or special event. From intimate dinners to festive feasts, 
   we bring the true flavors of Italy to your table. Let us handle the food, so you can enjoy 
@@ -57,14 +61,53 @@
 
 </main>
 
-<footer class="footer-inline">
+<footer>
   <div class="footer-inline">
     <img src="images/phone.png" alt="phone">
-    <p style="font-size: 18px; margin-right: 15px;">(555) 647-5454</p>
+    <p>(555) 647-5454</p>
     <img src="images/email.png" alt="email">
-    <p style="font-size: 18px;">email@example.com</p>
+    <p>email@example.com</p>
   </div>
 </footer>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+<button id="backToTop" title="Back to top">&#8679;</button>
+<script>
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const main = document.querySelector('main');
+    if(main) {
+      main.classList.add('visible');
+    }
+  });
+</script>
+
 
 </body>
 </html>

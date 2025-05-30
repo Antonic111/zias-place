@@ -1,47 +1,122 @@
-
-
-/* FONT + COLOR SETTINGS */
-body {
-  font-family: 'Segoe UI', sans-serif;
+/* RESET + STRUCTURE */
+html, body {
+  min-height: 100%;
   margin: 0;
+  font-family: 'Segoe UI', sans-serif;
   background-image: linear-gradient(to top, #333, #111);
-  color: #fff;       /* white text */
+  color: #fff;
   font-size: 18px;
 }
 
-/* LOGO */
-.logo {
-  max-width: 90%;
-  height: auto;
-  display: block;
-  margin: 2rem auto 1rem auto;
+.page-wrapper, .nav-container {
+  max-width: 900px;
+  width: 90%;       /* or 100%, or 95%, etc */
+  margin: 0 auto;
 }
 
-/* NAVIGATION */
-nav {
-  background: #333;
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;
-  font-size: 1.25rem;
-}
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 0 1.5rem;
-  font-weight: 600;
-}
-nav a:hover {
-  opacity: 0.7;
-}
-
-/* MAIN CONTENT */
 main {
+  flex: 1; /* Main will grow to fill available space */
   max-width: 900px;
   margin: auto;
   padding: 2.5rem 1.5rem;
   font-size: 1.5rem;
   line-height: 1.6;
+}
+
+footer {
+  background: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.footer-inline {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0 1.5rem;
+}
+
+.footer-inline img {
+  width: 20px;
+  height: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0rem 0rem;
+}
+
+/* LOGO */
+.logo {
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto 2rem auto;
+}
+
+/* NAVIGATION */
+nav {
+  background-color: #222;
+  width: 100%; /* change from 100vw */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+nav a {
+  flex: 1;
+  padding: 15px 0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ccc;
+  border-bottom: 4px solid transparent;
+  text-align: center;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+nav a:hover {
+  color: white;
+  background-color: #222;
+  border-bottom-color: #777;
+}
+
+nav a.active {
+  background-color: #222; /* keep the lighter black */
+  border-bottom: 4px solid white; /* change gold to white */
+  box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.6); /* white glow */
+  color: white;
+  font-weight: 700;
+}
+
+nav a:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6); /* white glow */
+  background-color: #222;
+  color: white;
 }
 
 /* HEADINGS */
@@ -57,28 +132,6 @@ ul {
   padding-left: 2rem;
 }
 
-/* FOOTER */
-footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 1rem;
-}
-.footer-inline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0;
-  flex-wrap: wrap; /* Allows it to wrap if screen is too narrow */
-}
-
-.footer-inline img {
-  width: 35px;
-  height: auto;
-}
-
 /* HEADER SECTION */
 header {
   background: #111;
@@ -86,21 +139,16 @@ header {
   padding: 2rem 1rem;
 }
 
-.logo {
-  max-width: 500px; /* Resize logo */
-  height: auto;
-  display: block;
-  margin: 0 auto 2rem auto;
-}
-
 header h1 {
-  font-family: 'Segoe UI', sans-serif;
   font-size: 1.2rem;
   font-weight: normal;
   color: white;
   margin: 0;
 }
-.welcome-row {
+
+/* WELCOME SECTIONS */
+.welcome-row,
+.welcome-row-reverse {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -110,16 +158,11 @@ header h1 {
 }
 
 .welcome-row-reverse {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 2.5rem 0;
-  gap: 2rem;
-  flex-wrap: wrap;
   flex-direction: row-reverse;
 }
 
-.welcome-row img,.welcome-row-reverse img {
+.welcome-row img,
+.welcome-row-reverse img {
   max-width: 300px;
   width: 100%;
   height: auto;
@@ -138,3 +181,188 @@ header h1 {
   color: #eee;
   margin-bottom: 0.5rem;
 }
+
+.gallery-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 2rem auto;
+
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.carousel {
+  overflow: hidden;
+
+  border-radius: 12px;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-track img {
+  width: 900px;
+  max-width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+  max-height: 500px;
+
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 5px;
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0,0,0,0.7);
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: max(10px, calc(50vw - 450px));
+  opacity: 0;
+  pointer-events: none;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  transition: opacity 0.4s ease;
+  z-index: 2000;
+}
+
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  background-color: #444;
+}
+
+main {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+
+  /* Nav Container and Links */
+  .nav-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  nav a {
+    font-size: 1rem;
+    padding: 10px 8px;
+    flex: none;       /* Remove equal flex so tabs shrink */
+    min-width: 0;     /* Avoid overflow */
+  }
+  
+  /* Stack welcome rows vertically */
+  .welcome-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 5px;
+  }
+  
+  .welcome-row img {
+    width: 100%;
+    max-height: none;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+  }
+  
+  .welcome-text {
+    padding: 0 10px;
+  }
+  
+  /* Main padding */
+  main {
+    padding: 0 10px;
+  }
+
+  /* Footer - stack inline items */
+  footer .footer-inline {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Reduce font sizes where needed */
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main h2 {
+    font-size: 1.25rem;
+  }
+
+  .welcome-text h3 {
+    font-size: 1.1rem;
+  }
+
+  /* Keep page wrapper width fluid */
+  .page-wrapper {
+    width: 95%;
+    max-width: 900px;
+    margin: 1rem auto;
+  }
+
+  /* Back to top button */
+  #backToTop {
+    right: 10px;  /* make it closer on small screens */
+    bottom: 20px;
+    padding: 10px 14px;
+    font-size: 20px;
+  }
+}
+

@@ -7,19 +7,24 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<header>
-  <img src="images/logo.png" alt="Zia's Place Logo" class="logo">
-  <h1>Authentic Italian Meals Made with Love.</h1>
-</header>
+<div class="page-wrapper">
+  <header>
+    <img src="images/logo.png" alt="Zia's Place Logo" class="logo">
+    <h1>Authentic Italian Meals Made with Love.</h1>
+  </header>
 
-  <nav>
+<nav>
+  <div class="nav-container">
     <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
+    <a href="menu.html" class="active">Menu</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
-  </nav>
+  </div>
+</nav>
+
   <main>
     <h2>Our Menu</h2>
+    <hr>
     <ul>
       <li>Spaghetti & Meatballs</li>
       <li>Lasagna</li>
@@ -27,9 +32,126 @@
       <li>Eggplant Rollatini</li>
       <li>Stuffed Shells</li>
     </ul>
+
+    <section class="gallery-section">
+      <hr>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn left">&#10094;</button>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track">
+            <img src="images/slideshow/food1.png" alt="Spaghetti">
+            <img src="images/slideshow/food2.jpg" alt="Chicken Parmesan">
+            <img src="images/slideshow/food3.png" alt="Pizza">
+            <img src="images/slideshow/food4.jpg" alt="Meatballs">
+            <img src="images/slideshow/food5.png" alt="George">
+          </div>
+        </div>
+        <button class="carousel-btn right">&#10095;</button>
+      </div>
+    </section>
   </main>
+
   <footer>
-    &copy; 2025 Zia's Place. All rights reserved.
+    <div class="footer-inline">
+      <img src="images/phone.png" alt="phone">
+      <p>(555) 647-5454</p>
+      <img src="images/email.png" alt="email">
+      <p>email@example.com</p>
+    </div>
   </footer>
+</div>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const slides = track.children;
+let currentIndex = 0;
+let isTransitioning = false;
+
+function moveToSlide(index) {
+  if (isTransitioning) return;
+
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  track.style.transition = 'transform 0.5s ease-in-out';
+  track.style.transform = `translateX(-${index * slideWidth}px)`;
+  isTransitioning = true;
+
+  // Unlock after transition ends
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 500); // Match transition duration
+}
+
+// Auto-advance
+setInterval(() => {
+  if (isTransitioning) return;
+  currentIndex = (currentIndex + 1) % slides.length;
+  moveToSlide(currentIndex);
+}, 6000);
+
+// Touch swipe
+let startX = 0;
+let isDown = false;
+
+track.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+  isDown = true;
+});
+
+track.addEventListener('touchend', e => {
+  if (!isDown || isTransitioning) return;
+  let endX = e.changedTouches[0].clientX;
+  if (endX < startX - 50) currentIndex = (currentIndex + 1) % slides.length;
+  else if (endX > startX + 50) currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  moveToSlide(currentIndex);
+  isDown = false;
+});
+
+// Keyboard arrows
+document.addEventListener('keydown', e => {
+  if (isTransitioning) return;
+  if (e.key === 'ArrowRight') {
+    currentIndex = (currentIndex + 1) % slides.length;
+    moveToSlide(currentIndex);
+  } else if (e.key === 'ArrowLeft') {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    moveToSlide(currentIndex);
+  }
+});
+
+// Click buttons
+document.querySelector('.carousel-btn.left').addEventListener('click', () => {
+  if (isTransitioning) return;
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  moveToSlide(currentIndex);
+});
+
+document.querySelector('.carousel-btn.right').addEventListener('click', () => {
+  if (isTransitioning) return;
+  currentIndex = (currentIndex + 1) % slides.length;
+  moveToSlide(currentIndex);
+});
+
+</script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === path || (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  });
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const main = document.querySelector('main');
+    if(main) {
+      main.classList.add('visible');
+    }
+  });
+</script>
 </body>
 </html>
