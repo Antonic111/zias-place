@@ -419,14 +419,25 @@ footer {
   footer p {
     font-size: 0.9rem;
   }
-    .gallery {
-    flex-wrap: wrap;
-    justify-content: center;
-    overflow-x: visible;
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    display: flex;
+    flex-wrap: nowrap;          /* No wrapping */
+    overflow-x: auto;           /* Enable horizontal scroll */
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    gap: 0.5rem;
   }
 
   .gallery img {
-    max-width: 280px;
+    max-width: 80vw;            /* Large enough, but not too wide */
     height: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    scroll-snap-align: center;
+    border-radius: 8px;
   }
 }
+
