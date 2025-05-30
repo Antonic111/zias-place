@@ -407,36 +407,51 @@ header h1 {
   }
 }
 
-/* Desktop: default */
-.welcome-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
 /* Mobile: stack vertically */
 @media (max-width: 768px) {
-  .welcome-row {
-    flex-direction: column;
+  /* Stack vertically */
+  .welcome-row,
+  .welcome-row-reverse {
+    flex-direction: column !important; /* force column */
   }
 
-  /* For odd rows: text first, image second */
-  .welcome-row:nth-child(1),
-  .welcome-row:nth-child(3) {
-    flex-direction: column;
+  /* Always show text first */
+  .welcome-row .welcome-text,
+  .welcome-row-reverse .welcome-text {
+    order: 1;
   }
 
-  /* For even rows: image first, text second on desktop,
-     but swap order on mobile to get text first, image second */
-  .welcome-row:nth-child(2) {
-    flex-direction: column;
-  }
-
-  /* Swap order for the even row children */
-  .welcome-row:nth-child(2) img {
-    order: 2; /* image goes second */
-  }
-  .welcome-row:nth-child(2) .welcome-text {
-    order: 1; /* text goes first */
+  /* Always show image second */
+  .welcome-row img,
+  .welcome-row-reverse img {
+    order: 2;
+    margin-top: 1rem; /* some spacing above image */
   }
 }
+
+@media (max-width: 768px) {
+  /* Increase "Our Menu" heading size only on menu.html */
+  .menu-page h2 {
+    font-size: 2rem;  /* Bigger size */
+  }
+
+  /* New: reduce list items font size */
+  .menu-page main ul li {
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-wrapper main h2 {
+    font-size: 2.2rem; /* Increase heading size */
+  }
+
+  .page-wrapper main p {
+    font-size: 1.2rem !important; /* Reduce paragraph size, override inline */
+    line-height: 1.4;
+  }
+}
+
+
+
