@@ -406,3 +406,37 @@ header h1 {
     margin-bottom: 2rem;
   }
 }
+
+/* Desktop: default */
+.welcome-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 768px) {
+  .welcome-row {
+    flex-direction: column;
+  }
+
+  /* For odd rows: text first, image second */
+  .welcome-row:nth-child(1),
+  .welcome-row:nth-child(3) {
+    flex-direction: column;
+  }
+
+  /* For even rows: image first, text second on desktop,
+     but swap order on mobile to get text first, image second */
+  .welcome-row:nth-child(2) {
+    flex-direction: column;
+  }
+
+  /* Swap order for the even row children */
+  .welcome-row:nth-child(2) img {
+    order: 2; /* image goes second */
+  }
+  .welcome-row:nth-child(2) .welcome-text {
+    order: 1; /* text goes first */
+  }
+}
