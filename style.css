@@ -332,6 +332,35 @@ footer p {
   margin: 0;
   font-size: 16px;
 }
+header, nav, footer {
+  width: 100%;
+  background-color: #111; /* or #222 for nav, whatever you used */
+}
+
+/* The inner containers to constrain width */
+.container,
+.nav-container,
+.footer-inline {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem; /* optional horizontal padding */
+}
+
+/* Example: if nav background is #222 */
+nav {
+  background-color: #222;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* footer background */
+footer {
+  background-color: #111;
+  color: #ccc;
+  text-align: center;
+  padding: 1.2rem 0; /* vertical padding */
+}
 
   /* Headings - scale them down relative to base font size */
   header h1 {
