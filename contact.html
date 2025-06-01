@@ -18,28 +18,54 @@
     <div class="nav-container">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
+	  <a href="catering.html">Catering</a>
       <a href="about.html">About</a>
       <a href="contact.html" class="active">Contact</a>
     </div>
   </nav>
 
   <div class="page-wrapper">
-    <main>
-      <h2>Contact Us</h2>
-      <hr />
-      <p>Phone: (555) 123-4567</p>
-      <p>Email: catering@ziasplace.com</p>
-    </main>
+<main>
+  <h2>Contact Us</h2>
+  <hr />
+  <br>
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Get in Touch</h3>
+      <p>We’d love to hear from you!</p>
+      <p><strong>Phone:</strong> <a href="tel:+15551234567">(555) 123-4567</a></p>
+      <p><strong>Email:</strong> <a href="mailto:catering@ziasplace.com">catering@ziasplace.com</a></p>
+    </div>
+
+    <div class="contact-form">
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Email" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" placeholder="Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formStatus"></p>
+    </div>
+  </div>
+</main>
+
+
   </div>
 
-  <footer>
-    <div class="footer-inline">
-      <img src="images/phone.png" alt="phone" />
-      <p>(555) 647-5454</p>
-      <img src="images/email.png" alt="email" />
-      <p>email@example.com</p>
-    </div>
-  </footer>
+<footer>
+  <div class="footer-inline">
+    <img src="images/phone.png" alt="phone">
+    <p><a href="tel:+15556475454">(555) 647-5454</a></p>
+    <img src="images/email.png" alt="email">
+    <p><a href="contact.html">email@example.com</a></p>
+  </div>
+</footer>
 
   <button id="backToTop" title="Back to top">&#8679;</button>
 
@@ -87,7 +113,7 @@
         const footerRect = footer.getBoundingClientRect();
         if (footerRect.top < window.innerHeight) {
           const overlap = window.innerHeight - footerRect.top;
-          backToTopButton.style.bottom = `${30 + overlap}px`;
+          backToTopButton.style.bottom = ${30 + overlap}px;
         } else {
           backToTopButton.style.bottom = "30px";
         }
@@ -99,5 +125,46 @@
       positionBackToTop();
     });
   </script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init('krTgbNFN4POZQm2rt');
+  })();
+
+  const form = document.getElementById('contactForm');
+  const statusMessage = document.getElementById('formStatus');
+
+  function showPopup(message) {
+    const popup = document.getElementById('popupNotification');
+    popup.textContent = message;
+    popup.classList.add('show');
+
+    setTimeout(() => {
+      popup.classList.remove('show');
+    }, 8000); // Hide after 8 seconds
+  }
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm('service_t8e6xvw', 'template_bimqk96', this)
+      .then(() => {
+        // Hide inline status message if used
+        statusMessage.textContent = "";
+        showPopup("Email sent! Thank you.");
+        form.reset();
+      }, (error) => {
+        showPopup("Oops! Something went wrong. Please try again.");
+        console.error('EmailJS error:', error);
+      });
+  });
+</script>
+
+
+<div id="popupNotification" class="popup-hidden">
+  Your email has been sent!
+</div>
+
+
 </body>
 </html>

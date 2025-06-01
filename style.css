@@ -5,14 +5,46 @@
 
 /* BASE STRUCTURE */
 html, body {
-  min-height: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-image: linear-gradient(to top, #333, #111);
   color: #fff;
   font-size: 18px;
+  background-image: linear-gradient(to top, #333, #111);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
+
+html {
+  overflow-y: scroll;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-wrapper {
+  flex: 1;
+}
+
+footer {
+  height: 60px;         /* fixed height */
+  padding: 10px 20px;   /* fixed padding */
+  box-sizing: border-box;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+
+
 
 .page-wrapper,
 .nav-container,
@@ -25,6 +57,115 @@ html, body {
   padding: 0 1rem;
   box-sizing: border-box;
 }
+
+.menu-image img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.menu-section {
+  max-width: 900px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.menu-header,
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 140px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.menu-header {
+  font-weight: bold;
+  border-bottom: 3px solid #ccc;
+  color: white;
+  margin: 0;
+  margin-top: 0;
+}
+
+.price-notice {
+  text-align: center;
+  font-weight: bold;
+  margin: 1em 0;
+  font-size: 18px; /* Adjust size here */
+}
+
+
+.hr5 {
+  border-bottom: 3px solid #ccc;
+  color: white;
+}
+
+
+.size-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.size-label {
+  font-size: 1rem;
+}
+
+.size-desc {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: #ccc;
+}
+
+.dish-name {
+  flex: 1;
+}
+
+.dish-price {
+  text-align: right;
+  width: 100%;
+  color: #ccc;
+}
+
+
+.catering-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.catering-text {
+  position: relative;
+  z-index: 1;
+}
+
+.note-overlay {
+  position: absolute;
+  top: -40px;
+  right: 60px; /* Adjust as needed */
+  width: 230px; /* Resize as needed */
+  transform: rotate(8deg);
+  z-index: 2;
+  pointer-events: none; /* So it doesn’t block clicks */
+}
+
+
+.note-image {
+  flex: 1 1 35%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.note-image img {
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+
 
 .container {
   overflow-x: hidden; /* prevent overflow */
@@ -141,9 +282,15 @@ nav a:focus {
 /* HEADINGS */
 h2 {
   color: #eee;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
+
+.smaller-text {
+  font-size: 1.125rem; /* or smaller like 1rem or 0.95rem */
+  line-height: 1.5;
+}
+
 
 /* LISTS */
 ul {
@@ -234,7 +381,6 @@ header h1 {
   margin: 2rem auto;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .carousel {
@@ -262,15 +408,15 @@ header h1 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
+  background: none; /* Removes background */
+  border: none;      /* Removes border */
+  font-size: 2.5rem;
+  color: white;      /* Arrow color */
+  padding: 0 15px;
+  z-index: 2;
   cursor: pointer;
-  z-index: 10;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  user-select: none;
+  text-shadow: 0 0 8px rgba(0,0,0,1);
 }
 
 .carousel-btn.left {
@@ -282,8 +428,284 @@ header h1 {
 }
 
 .carousel-btn:hover {
-  background-color: rgba(0,0,0,0.7);
+  color: black; /* Optional hover effect */
+  background: none;
 }
+
+.carousel-dots {
+  text-align: center;
+}
+
+.carousel-dots .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+  background-color: grey;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background-color: white;
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.7);
+}
+
+.carousel-shadow {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.footer-inline a {
+  color: #D46A6A;
+  text-decoration: none;
+}
+
+.footer-inline a:hover {
+  color: #B55151;
+  text-decoration: underline;
+}
+
+form {
+  max-width: 100%;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #D46A6A;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #B55151;
+}
+
+/* ------------------------------------------- CONTACT PAGE INFO -------------------------------------------*/
+.contact-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start; /* keeps boxes aligned at the top */
+}
+
+.contact-info {
+  flex: 0 0 300px; /* fixed width */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-form {
+  flex: 1 1 0; /* allows growing/shrinking, but independent of .contact-info */
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-info h3 {
+  margin-top: 0;
+  color: #b74141; /* your soft red */
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.contact-info a {
+  color: #b74141;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%; 
+  margin-top: 5px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* include padding/border in width calc */
+  margin-bottom: 10px;
+}
+
+.contact-form button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #b74141;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #942f2f; /* a darker soft red */
+}
+
+#formStatus {
+  margin-top: 15px;
+  font-weight: bold;
+  color: white;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  max-height: 400px;
+  min-height: 200px;
+}
+
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+#popupNotification {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 9999;
+}
+
+#popupNotification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #b74141;
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------- CATERING MOBILE WRAPPING ------------------------------------------- */
+
+@media (max-width: 600px) {
+  .catering-wrapper {
+    padding: 0 10px;
+    font-size: 0.75rem; /* Smaller text for mobile */
+  }
+  
+  .note-overlay {
+    width: 100px;     /* Smaller size for the note */
+    top: -40px;       /* Adjust vertical position */
+    right: -10px;     /* Adjust horizontal position */
+  }
+
+  /* Change menu header and rows from grid to flex with wrapping */
+  .menu-header,
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto; /* Name | Size | Price */
+  gap: 6px;
+  align-items: start;
+}
+
+
+.dish-name {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.size-column,
+.dish-price {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+
+
+
+
+  /* Size columns and price adjust accordingly */
+  .size-column,
+  .dish-price {
+    flex: 1 1 60px;
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* Smaller font and no wrapping for size labels and descriptions */
+  .size-label,
+  .size-desc {
+    display: block;
+    white-space: nowrap;
+    font-size: 0.7rem;
+  }
+
+  /* Reduce margin between menu sections */
+  .menu-section {
+    margin-bottom: 15px;
+  }
+
+  /* Price notice smaller */
+  .price-notice {
+    font-size: 0.7rem;
+    padding: 0 5px;
+  }
+
+  /* Smaller note overlay for mobile */
+  .note-overlay {
+    max-width: 60px;
+  }
+}
+
+
+
 
 /* BACK TO TOP BUTTON */
 #backToTop {
@@ -452,6 +874,3 @@ header h1 {
     line-height: 1.4;
   }
 }
-
-
-

@@ -18,6 +18,7 @@
     <div class="nav-container">
       <a href="index.html">Home</a>
       <a href="menu.html" class="active">Menu</a>
+	  <a href="catering.html">Catering</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </div>
@@ -25,43 +26,47 @@
 
   <div class="page-wrapper">
     <main>
-      <h2>Our Menu</h2>
-      <hr>
-      <ul>
-        <li>Spaghetti & Meatballs</li>
-        <li>Lasagna</li>
-        <li>Chicken Parmesan</li>
-        <li>Eggplant Rollatini</li>
-        <li>Stuffed Shells</li>
-      </ul>
+<div class="container">
+<div class="menu-image">
+  <img src="images/zia-menu.png" alt="Zia's Place Menu" />
+  </div>
+</div>
+
 
       <section class="gallery-section">
         <hr>
-        <div class="carousel-wrapper">
-          <button class="carousel-btn left" aria-label="Previous slide">&#10094;</button>
-          <div class="carousel" id="carousel">
-            <div class="carousel-track">
-              <img src="images/slideshow/food1.png" alt="Spaghetti">
-              <img src="images/slideshow/food2.jpg" alt="Chicken Parmesan">
-              <img src="images/slideshow/food3.png" alt="Pizza">
-              <img src="images/slideshow/food4.jpg" alt="Meatballs">
-              <img src="images/slideshow/food5.png" alt="Italian Dish">
-            </div>
-          </div>
-          <button class="carousel-btn right" aria-label="Next slide">&#10095;</button>
-        </div>
+<div class="carousel-wrapper">
+  <button class="carousel-btn left" aria-label="Previous slide">&#10094;</button>
+<div class="carousel-shadow">
+  <div class="carousel" id="carousel">
+    <div class="carousel-track">
+      <img src="images/slideshow/food1.png" alt="Spaghetti">
+      <img src="images/slideshow/food2.jpg" alt="Chicken Parmesan">
+      <img src="images/slideshow/food3.png" alt="Pizza">
+      <img src="images/slideshow/food4.jpg" alt="Meatballs">
+      <img src="images/slideshow/food5.png" alt="Italian Dish">
+    </div>
+  </div>
+</div>
+
+  <button class="carousel-btn right" aria-label="Next slide">&#10095;</button>
+
+  <!-- ADD THIS BELOW THE CAROUSEL -->
+  <div class="carousel-dots" id="carouselDots"></div>
+</div>
+
       </section>
     </main>
   </div>
 
-  <footer>
-    <div class="footer-inline">
-      <img src="images/phone.png" alt="phone">
-      <p>(555) 647-5454</p>
-      <img src="images/email.png" alt="email">
-      <p>email@example.com</p>
-    </div>
-  </footer>
+<footer>
+  <div class="footer-inline">
+    <img src="images/phone.png" alt="phone">
+    <p><a href="tel:+15556475454">(555) 647-5454</a></p>
+    <img src="images/email.png" alt="email">
+    <p><a href="contact.html">email@example.com</a></p>
+  </div>
+</footer>
 
   <button id="backToTop" title="Back to top">&#8679;</button>
 
@@ -89,6 +94,23 @@
     const track = document.querySelector('.carousel-track');
     const slides = track.children;
     let currentIndex = 0;
+	const dotsContainer = document.getElementById('carouselDots');
+
+// Create the dots
+Array.from(slides).forEach((_, index) => {
+  const dot = document.createElement('span');
+  dot.classList.add('dot');
+  if (index === 0) dot.classList.add('active');
+
+  dot.addEventListener('click', () => {
+    currentIndex = index;
+    moveToSlide(currentIndex);
+    updateDots();
+  });
+
+  dotsContainer.appendChild(dot);
+});
+
     let isTransitioning = false;
 
     function moveToSlide(index) {
@@ -98,7 +120,15 @@
       track.style.transform = `translateX(-${index * slideWidth}px)`;
       isTransitioning = true;
       setTimeout(() => { isTransitioning = false; }, 500);
+	  updateDots();
     }
+	
+	function updateDots() {
+  const dots = dotsContainer.querySelectorAll('.dot');
+  dots.forEach(dot => dot.classList.remove('active'));
+  if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+}
+
 
     // Auto-advance every 6 seconds
     setInterval(() => {
