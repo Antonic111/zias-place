@@ -68,7 +68,7 @@
 </footer>
 
   <button id="backToTop" title="Back to top">&#8679;</button>
-
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Make main visible with animation
@@ -80,6 +80,29 @@
         main.classList.add('visible');
       }, 10);
     }
+	
+// Highlight active nav link and hide appropriate dividers
+const path = window.location.pathname.split("/").pop();
+document.querySelectorAll("nav a").forEach(link => {
+  const href = link.getAttribute("href");
+  if (href === path || (href === "index.html" && (path === "" || path === "/"))) {
+    link.classList.add("active");
+
+    // Hide right divider of the previous link (left side of this one)
+    if (link.previousElementSibling) {
+      link.previousElementSibling.classList.add("no-divider-right");
+    }
+
+    // Hide right divider of this link (right side of this one)
+    if (link.nextElementSibling) {
+      link.classList.add("no-divider-right");
+    }
+  } else {
+    link.classList.remove("active");
+    link.classList.remove("no-divider-right");
+  }
+});
+
 
     // Back to top button logic
     const backToTopButton = document.getElementById("backToTop");
