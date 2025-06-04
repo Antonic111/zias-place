@@ -143,26 +143,36 @@
       }
     }
 
+    function checkBackToTopVisibility() {
+      if (!backToTopButton) return;
+      if (window.scrollY > 1) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+    }
+
     if (backToTopButton && footer) {
-window.addEventListener("scroll", () => {
-  console.log("Scroll Y:", window.scrollY);
-  if (window.scrollY > 1) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
-  }
-  positionBackToTop();
-});
+      // On scroll, update button visibility and position
+      window.addEventListener("scroll", () => {
+        checkBackToTopVisibility();
+        positionBackToTop();
+      });
 
+      // On resize, update position
+      window.addEventListener("resize", positionBackToTop);
 
+      // On page load, check if button should be visible & position it
+      checkBackToTopVisibility();
+      positionBackToTop();
+
+      // Button click scroll to top
       backToTopButton.addEventListener("click", () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       });
-
-      window.addEventListener("resize", positionBackToTop);
-      positionBackToTop();
     }
   });
 </script>
+
 </body>
 </html>
