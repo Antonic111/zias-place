@@ -70,7 +70,7 @@
 
   <button id="backToTop" title="Back to top">&#8679;</button>
 
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     // Navigation active link
     const path = window.location.pathname.split('/').pop();
@@ -81,6 +81,12 @@
         (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
       ) {
         link.classList.add('active');
+        if (link.previousElementSibling) {
+          link.previousElementSibling.classList.add('no-divider-right');
+        }
+        if (link.nextElementSibling) {
+          link.classList.add('no-divider-right');
+        }
       } else {
         link.classList.remove('active');
       }
@@ -88,101 +94,110 @@
 
     // Animate main content
     const main = document.querySelector('main');
-    if (main) main.classList.add('visible');
+    if (main) {
+      main.classList.remove('visible');
+      void main.offsetWidth;
+      setTimeout(() => {
+        main.classList.add('visible');
+      }, 10);
+    }
 
     // Carousel setup
     const track = document.querySelector('.carousel-track');
-    const slides = track.children;
-    let currentIndex = 0;
-	const dotsContainer = document.getElementById('carouselDots');
+    const dotsContainer = document.getElementById('carouselDots');
+    const leftBtn = document.querySelector('.carousel-btn.left');
+    const rightBtn = document.querySelector('.carousel-btn.right');
 
-// Create the dots
-Array.from(slides).forEach((_, index) => {
-  const dot = document.createElement('span');
-  dot.classList.add('dot');
-  if (index === 0) dot.classList.add('active');
+    if (track && dotsContainer && leftBtn && rightBtn) {
+      const slides = track.children;
+      let currentIndex = 0;
+      let isTransitioning = false;
 
-  dot.addEventListener('click', () => {
-    currentIndex = index;
-    moveToSlide(currentIndex);
-    updateDots();
-  });
+      // Create dots
+      Array.from(slides).forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
 
-  dotsContainer.appendChild(dot);
-});
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          moveToSlide(currentIndex);
+        });
 
-    let isTransitioning = false;
+        dotsContainer.appendChild(dot);
+      });
 
-    function moveToSlide(index) {
-      if (isTransitioning) return;
-      const slideWidth = slides[0].getBoundingClientRect().width;
-      track.style.transition = 'transform 0.5s ease-in-out';
-      track.style.transform = `translateX(-${index * slideWidth}px)`;
-      isTransitioning = true;
-      setTimeout(() => { isTransitioning = false; }, 500);
-	  updateDots();
+      function moveToSlide(index) {
+        if (isTransitioning) return;
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transition = 'transform 0.5s ease-in-out';
+        track.style.transform = `translateX(-${index * slideWidth}px)`;
+        isTransitioning = true;
+        setTimeout(() => { isTransitioning = false; }, 500);
+        updateDots();
+      }
+
+      function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+      }
+
+      // Auto-advance
+      setInterval(() => {
+        if (isTransitioning) return;
+        currentIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(currentIndex);
+      }, 6000);
+
+      // Touch swipe
+      let startX = 0;
+      track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+      });
+      track.addEventListener('touchend', e => {
+        if (isTransitioning) return;
+        const endX = e.changedTouches[0].clientX;
+        if (endX < startX - 50) {
+          currentIndex = (currentIndex + 1) % slides.length;
+          moveToSlide(currentIndex);
+        } else if (endX > startX + 50) {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          moveToSlide(currentIndex);
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', e => {
+        if (isTransitioning) return;
+        if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % slides.length;
+          moveToSlide(currentIndex);
+        } else if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          moveToSlide(currentIndex);
+        }
+      });
+
+      // Button clicks
+      leftBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        moveToSlide(currentIndex);
+      });
+      rightBtn.addEventListener('click', () => {
+        if (isTransitioning) return;
+        currentIndex = (currentIndex + 1) % slides.length;
+        moveToSlide(currentIndex);
+      });
     }
-	
-	function updateDots() {
-  const dots = dotsContainer.querySelectorAll('.dot');
-  dots.forEach(dot => dot.classList.remove('active'));
-  if (dots[currentIndex]) dots[currentIndex].classList.add('active');
-}
-
-
-    // Auto-advance every 6 seconds
-    setInterval(() => {
-      if (isTransitioning) return;
-      currentIndex = (currentIndex + 1) % slides.length;
-      moveToSlide(currentIndex);
-    }, 6000);
-
-    // Touch swipe
-    let startX = 0;
-    track.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-    });
-    track.addEventListener('touchend', e => {
-      if (isTransitioning) return;
-      let endX = e.changedTouches[0].clientX;
-      if (endX < startX - 50) {
-        currentIndex = (currentIndex + 1) % slides.length;
-        moveToSlide(currentIndex);
-      } else if (endX > startX + 50) {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        moveToSlide(currentIndex);
-      }
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', e => {
-      if (isTransitioning) return;
-      if (e.key === 'ArrowRight') {
-        currentIndex = (currentIndex + 1) % slides.length;
-        moveToSlide(currentIndex);
-      } else if (e.key === 'ArrowLeft') {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        moveToSlide(currentIndex);
-      }
-    });
-
-    // Button clicks
-    document.querySelector('.carousel-btn.left').addEventListener('click', () => {
-      if (isTransitioning) return;
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      moveToSlide(currentIndex);
-    });
-    document.querySelector('.carousel-btn.right').addEventListener('click', () => {
-      if (isTransitioning) return;
-      currentIndex = (currentIndex + 1) % slides.length;
-      moveToSlide(currentIndex);
-    });
 
     // Back to Top button
     const backToTopButton = document.getElementById("backToTop");
     const footer = document.querySelector("footer");
 
     function positionBackToTop() {
+      if (!backToTopButton || !footer) return;
       const footerRect = footer.getBoundingClientRect();
       if (footerRect.top < window.innerHeight) {
         const overlap = window.innerHeight - footerRect.top;
@@ -192,24 +207,24 @@ Array.from(slides).forEach((_, index) => {
       }
     }
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        backToTopButton.classList.add("show");
-      } else {
-        backToTopButton.classList.remove("show");
-      }
+    if (backToTopButton && footer) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+        positionBackToTop();
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("resize", positionBackToTop);
       positionBackToTop();
-    });
-
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    });
-
-    window.addEventListener("resize", positionBackToTop);
-
-    positionBackToTop();
+    }
   });
-  </script>
-
+</script>
 </body>
 </html>

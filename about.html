@@ -79,40 +79,56 @@
 
   <button id="backToTop" title="Back to top">&#8679;</button>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Highlight the active nav link based on current path
-      const path = window.location.pathname.split('/').pop();
-      const links = document.querySelectorAll('nav a');
-      links.forEach(link => {
-        if (
-          link.getAttribute('href') === path ||
-          (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
-        ) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Highlight the active nav link based on current path
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (
+        link.getAttribute('href') === path ||
+        (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
+      ) {
+        link.classList.add('active');
+        // Hide divider to the left and right of the active link
+        if (link.previousElementSibling) {
+          link.previousElementSibling.classList.add('no-divider-right');
         }
-      });
-
-      // Animate main content appearance
-      const main = document.querySelector('main');
-      if (main) main.classList.add('visible');
-
-      // Back to top button logic
-      const backToTopButton = document.getElementById("backToTop");
-      const footer = document.querySelector("footer");
-
-      function positionBackToTop() {
-        const footerRect = footer.getBoundingClientRect();
-        if (footerRect.top < window.innerHeight) {
-          const overlap = window.innerHeight - footerRect.top;
-          backToTopButton.style.bottom = `${30 + overlap}px`;
-        } else {
-          backToTopButton.style.bottom = "30px";
+        if (link.nextElementSibling) {
+          link.classList.add('no-divider-right');
         }
+      } else {
+        link.classList.remove('active');
       }
+    });
 
+    // Animate main content appearance
+    const main = document.querySelector('main');
+    if (main) {
+      main.classList.remove('visible'); // remove if already added
+      void main.offsetWidth; // Force reflow to restart animation
+      setTimeout(() => {
+        main.classList.add('visible');
+      }, 10);
+    }
+
+    // Back to top button logic
+    const backToTopButton = document.getElementById("backToTop");
+    const footer = document.querySelector("footer");
+
+    function positionBackToTop() {
+      if (!backToTopButton || !footer) return;
+
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        backToTopButton.style.bottom = `${30 + overlap}px`;
+      } else {
+        backToTopButton.style.bottom = "30px";
+      }
+    }
+
+    if (backToTopButton && footer) {
       window.addEventListener("scroll", () => {
         if (window.scrollY > 100) {
           backToTopButton.classList.add("show");
@@ -130,7 +146,8 @@
 
       // Position button on page load
       positionBackToTop();
-    });
-  </script>
+    }
+  });
+</script>
 </body>
 </html>

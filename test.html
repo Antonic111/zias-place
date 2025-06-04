@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Back to Top Test</title>
+<style>
+  body {
+    height: 3000px; /* force scroll */
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  #backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    font-size: 2rem;
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  #backToTop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+</head>
+<body>
+
+<button id="backToTop" aria-label="Back to top" title="Back to top">&#8679;</button>
+
+<script>
+  const backToTopButton = document.getElementById("backToTop");
+
+  // Scroll event listener - OUTSIDE DOMContentLoaded for test
+  window.addEventListener("scroll", () => {
+    console.log("Scroll detected! scrollY:", window.scrollY);
+    if (window.scrollY > 1) {
+      backToTopButton.classList.add("show");
+    } else {
+      backToTopButton.classList.remove("show");
+    }
+  });
+
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>

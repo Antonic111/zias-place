@@ -1,13 +1,15 @@
-/* GLOBAL RESET */
+/* ------------------------------------------- GLOBAL RESET -------------------------------------------*/
 * {
   box-sizing: border-box;
 }
 
-/* BASE STRUCTURE */
+/* ------------------------------------------- BASE STRUCTURE -------------------------------------------*/
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
+  overflow-x: hidden;
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
   font-size: 18px;
@@ -43,6 +45,43 @@ footer {
   color: white;
 }
 
+
+/* Remove outer border on the whole catering menu */
+.menu-section {
+  border: none;  /* no box */
+  margin-bottom: 2rem;
+  overflow: visible;
+}
+
+/* Keep horizontal line between rows */
+.menu-header,
+.menu-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 140px;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ccc;  /* horizontal lines */
+  box-sizing: border-box;          /* ensure padding + border inside */
+}
+
+/* Remove bottom border on last row so no extra line */
+.menu-row:last-child {
+  border-bottom: none;
+}
+
+/* Vertical borders only on the right side of cells, except last cell */
+.menu-header > div,
+.menu-row > div {
+  border-right: 1px solid #ccc;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+/* Remove right border on last column cells */
+.menu-header > div:last-child,
+.menu-row > div:last-child {
+  border-right: none;
+}
 
 
 
@@ -165,12 +204,7 @@ footer {
   border: none;
 }
 
-
-.container {
-  overflow-x: hidden; /* prevent overflow */
-}
-
-/* MAIN CONTENT */
+/* ------------------------------------------- MAIN CONTENT -------------------------------------------*/
 main {
   flex: 1; /* grow to fill available space */
   max-width: 900px;
@@ -178,6 +212,20 @@ main {
   padding: 2.5rem 1.5rem;
   font-size: 1.5rem;
   line-height: 1.6;
+}
+
+main {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+main.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-content {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 1s ease forwards;
@@ -228,7 +276,7 @@ footer p {
   margin: 0 auto 2rem auto;
 }
 
-/* NAVIGATION */
+/*------------------------------------------- NAVIGATION BAR -------------------------------------------*/
 nav {
   background-color: #222;
   width: 100%; /* avoid 100vw */
@@ -263,22 +311,84 @@ nav a:hover {
   border-bottom-color: #777;
 }
 
+/* Style for nav links */
+nav a {
+  flex: 1;
+  padding: 15px 0;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ccc;
+  border-bottom: 4px solid transparent;
+  text-align: center;
+  transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+  letter-spacing: 0.05em;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* Hover effect */
+nav a:hover {
+  color: white;
+  background-color: #222;
+  border-bottom-color: #777;
+}
+
+/* Active nav link */
 nav a.active {
   background-color: #222;
   border-bottom: 4px solid white;
   box-shadow: 0 -4px 8px rgba(255, 255, 255, 0.6);
   color: white;
   font-weight: 700;
+  position: relative;
+  z-index: 10;
 }
 
-nav a:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
-  background-color: #222;
-  color: white;
+
+
+/* Divider between nav links */
+nav a:not(:last-child) {
+  position: relative;
 }
 
-/* HEADINGS */
+nav a:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  border-right: 1px solid #ccc; /* divider line */
+  pointer-events: none;
+}
+
+/* Hide right-side divider */
+nav a.no-divider-right::after {
+  display: none !important;
+}
+
+nav a.no-divider-left::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  border-left: 1px solid #ccc; /* divider line on left */
+  pointer-events: none;
+}
+
+/* To hide left divider */
+nav a.no-divider-left::before {
+  display: none !important;
+}
+
+
+
+
+
+/* ------------------------------------------- HEADINGS -------------------------------------------*/
 h2 {
   color: #eee;
   font-size: 2rem;
@@ -348,7 +458,7 @@ header h1 {
   margin-bottom: 0.5rem;
 }
 
-/* GALLERY */
+/* ------------------------------------------- MENU GALLERY -------------------------------------------*/
 .gallery-section {
   overflow-x: auto;
   padding: 0 1rem;
@@ -629,41 +739,7 @@ input:focus, textarea:focus {
   outline-offset: 2px;
 }
 
-
-/* ------------------------------------------- CATERING MOBILE WRAPPING ------------------------------------------- */
-
-/* Mobile first */
-.contact-container {
-  display: flex;
-  flex-direction: column; /* Stack on mobile */
-  gap: 20px;
-}
-
-.contact-info,
-.contact-form {
-  background-color: #222;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-/* Desktop override */
-@media (min-width: 601px) {
-  .contact-container {
-    flex-direction: row;         /* Side by side on desktop */
-    align-items: flex-start;     /* Let each box control its height */
-  }
-
-  .contact-info {
-    flex: 0 0 auto;              /* Fixed height and width */
-    width: 300px;                /* Optional: fixed width */
-  }
-
-  .contact-form {
-    flex: 1;                     /* Grow to fill remaining space */
-  }
-}
-
+/* ------------------------------------------- CATERING MOBILE WRAPPING -------------------------------------------*/
 
 @media (max-width: 600px) {
   .catering-wrapper {
@@ -675,37 +751,59 @@ input:focus, textarea:focus {
     width: 100px;
     top: -40px;
     right: -10px;
+    max-width: 60px;
   }
 
   .menu-header,
   .menu-row {
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 6px;
-    align-items: start;
+    grid-template-columns: 1fr 80px 80px;  /* Adjust fixed widths for price columns */
+    gap: 0;                               /* Remove gap to avoid line breaks */
+    align-items: center;
+    border-bottom: 1px solid #ccc;        /* Horizontal row border */
+    box-sizing: border-box;
+    padding: 8px 6px;
   }
 
+  .menu-row:last-child {
+    border-bottom: none;                   /* No border on last row */
+  }
+
+  /* Vertical borders on grid items except last */
+  .menu-header > div,
+  .menu-row > div {
+    border-right: 1px solid #ccc;
+    padding: 0 6px;
+    box-sizing: border-box;
+  }
+
+  .menu-header > div:last-child,
+  .menu-row > div:last-child {
+    border-right: none;                    /* Remove right border on last col */
+  }
+
+  /* Dish name styling */
   .dish-name {
     overflow-wrap: break-word;
     word-break: break-word;
-    white-space: normal;
+    white-space: normal;                   /* Allow wrapping */
     font-size: 1rem;
   }
 
+  /* Sizes and prices text alignment and sizing */
   .size-column,
   .dish-price {
-    flex: 1 1 60px;
-    min-width: 50px;
     text-align: right;
-    white-space: nowrap;
-    font-size: 1rem;
+    white-space: nowrap;                   /* Keep prices on one line */
+    font-size: 0.85rem;
   }
 
   .size-label,
   .size-desc {
     display: block;
     white-space: nowrap;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    color: #ccc;
   }
 
   .menu-section {
@@ -717,18 +815,15 @@ input:focus, textarea:focus {
     padding: 0 5px;
   }
 
-  .note-overlay {
-    max-width: 60px;
-  }
-
-  /* ✅ Contact stacked on mobile */
+  /* Contact container stacking on mobile */
   .contact-container {
     flex-direction: column;
   }
 }
 
 
-/* BACK TO TOP BUTTON */
+
+/* ------------------------------------------- BACK TO TOP BUTTON -------------------------------------------*/
 #backToTop {
   position: fixed;
   bottom: 30px;
@@ -757,7 +852,7 @@ input:focus, textarea:focus {
   background-color: #444;
 }
 
-/* RESPONSIVE STYLES */
+/* ------------------------------------------- RESPONSIVE STYLES -------------------------------------------*/
 @media (max-width: 600px) {
   /* Base font size downscale */
   body, html, .page-wrapper {

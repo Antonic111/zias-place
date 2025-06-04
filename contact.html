@@ -20,7 +20,7 @@
       <a href="menu.html">Menu</a>
 	  <a href="catering.html">Catering</a>
       <a href="about.html">About</a>
-      <a href="contact.html" class="active">Contact</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
@@ -69,97 +69,79 @@
 
   <button id="backToTop" title="Back to top">&#8679;</button>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Highlight active nav link based on current path
-      const path = window.location.pathname.split('/').pop();
-      const links = document.querySelectorAll('nav a');
-      links.forEach(link => {
-        if (
-          link.getAttribute('href') === path ||
-          (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
-        ) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Make main visible with animation
+    const main = document.querySelector('main');
+    if (main) {
+      main.classList.remove('visible');
+      void main.offsetWidth;
+      setTimeout(() => {
+        main.classList.add('visible');
+      }, 10);
+    }
 
-      // Make main visible with animation
-      const main = document.querySelector('main');
-      if (main) main.classList.add('visible');
+    // Back to top button logic
+    const backToTopButton = document.getElementById("backToTop");
+    const footer = document.querySelector("footer");
 
-      // Back to top button logic
-      const backToTopButton = document.getElementById("backToTop");
-      const footer = document.querySelector("footer");
-
-      // Show/hide back to top button based on scroll position
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 100) {
-          backToTopButton.classList.add("show");
-        } else {
-          backToTopButton.classList.remove("show");
-        }
-        positionBackToTop();
-      });
-
-      // Scroll smoothly to top on button click
-      backToTopButton.addEventListener("click", () => {
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      });
-
-      // Adjust back to top button position if footer is visible
-      function positionBackToTop() {
-        const footerRect = footer.getBoundingClientRect();
-        if (footerRect.top < window.innerHeight) {
-          const overlap = window.innerHeight - footerRect.top;
-          backToTopButton.style.bottom = ${30 + overlap}px;
-        } else {
-          backToTopButton.style.bottom = "30px";
-        }
+    function positionBackToTop() {
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        backToTopButton.style.bottom = `${30 + overlap}px`;
+      } else {
+        backToTopButton.style.bottom = "30px";
       }
+    }
 
-      window.addEventListener("resize", positionBackToTop);
-
-      // Initial call to position button correctly on page load
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
       positionBackToTop();
     });
-  </script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function() {
+
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+
+    window.addEventListener("resize", positionBackToTop);
+    positionBackToTop();
+
+    // EmailJS initialization
     emailjs.init('krTgbNFN4POZQm2rt');
-  })();
 
-  const form = document.getElementById('contactForm');
-  const statusMessage = document.getElementById('formStatus');
+    const form = document.getElementById('contactForm');
+    const statusMessage = document.getElementById('formStatus');
 
-  function showPopup(message) {
-    const popup = document.getElementById('popupNotification');
-    popup.textContent = message;
-    popup.classList.add('show');
+    function showPopup(message) {
+      const popup = document.getElementById('popupNotification');
+      popup.textContent = message;
+      popup.classList.add('show');
 
-    setTimeout(() => {
-      popup.classList.remove('show');
-    }, 8000); // Hide after 8 seconds
-  }
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 8000);
+    }
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-    emailjs.sendForm('service_t8e6xvw', 'template_bimqk96', this)
-      .then(() => {
-        // Hide inline status message if used
-        statusMessage.textContent = "";
-        showPopup("Email sent! Thank you.");
-        form.reset();
-      }, (error) => {
-        showPopup("Oops! Something went wrong. Please try again.");
-        console.error('EmailJS error:', error);
-      });
+      emailjs.sendForm('service_t8e6xvw', 'template_bimqk96', this)
+        .then(() => {
+          statusMessage.textContent = "";
+          showPopup("Email sent! Thank you.");
+          form.reset();
+        }, (error) => {
+          showPopup("Oops! Something went wrong. Please try again.");
+          console.error('EmailJS error:', error);
+        });
+    });
   });
 </script>
-
 
 <div id="popupNotification" class="popup-hidden">
   Your email has been sent!

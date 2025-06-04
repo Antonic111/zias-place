@@ -25,6 +25,7 @@
   </nav>
   <div class="page-wrapper">
     <main>
+	<div class="main-content">
       <h2>Welcome to Zia's Place!</h2>
       <hr>
 	  <div class="smaller-text">
@@ -78,6 +79,7 @@
         </div>
         <img src="images/Italian Dish 3.png" alt="Italian Dish 3">
       </section>
+	  </div>
     </main>
   </div>
 
@@ -92,7 +94,7 @@
 
   <button id="backToTop" aria-label="Back to top" title="Back to top">&#8679;</button>
 
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     // Highlight active nav link
     const path = window.location.pathname.split('/').pop();
@@ -103,6 +105,14 @@
         (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
       ) {
         link.classList.add('active');
+
+        // Hide divider to the left and right of the active link
+        if (link.previousElementSibling) {
+          link.previousElementSibling.classList.add('no-divider-right');
+        }
+        if (link.nextElementSibling) {
+          link.classList.add('no-divider-right');
+        }
       } else {
         link.classList.remove('active');
       }
@@ -110,13 +120,20 @@
 
     // Animate main content visibility
     const main = document.querySelector('main');
-    if (main) main.classList.add('visible');
+    if (main) {
+      main.classList.remove('visible');
+      void main.offsetWidth;
+      setTimeout(() => {
+        main.classList.add('visible');
+      }, 10);
+    }
 
-    // Back to Top button setup
+    // Back to top logic
     const backToTopButton = document.getElementById("backToTop");
     const footer = document.querySelector("footer");
 
     function positionBackToTop() {
+      if (!backToTopButton || !footer) return;
       const footerRect = footer.getBoundingClientRect();
       if (footerRect.top < window.innerHeight) {
         const overlap = window.innerHeight - footerRect.top;
@@ -126,22 +143,26 @@
       }
     }
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        backToTopButton.classList.add("show");
-      } else {
-        backToTopButton.classList.remove("show");
-      }
+    if (backToTopButton && footer) {
+window.addEventListener("scroll", () => {
+  console.log("Scroll Y:", window.scrollY);
+  if (window.scrollY > 1) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+  positionBackToTop();
+});
+
+
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+
+      window.addEventListener("resize", positionBackToTop);
       positionBackToTop();
-    });
-
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    });
-
-    window.addEventListener("resize", positionBackToTop);
-    positionBackToTop();
+    }
   });
-  </script>
+</script>
 </body>
 </html>
