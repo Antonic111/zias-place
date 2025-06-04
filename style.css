@@ -868,22 +868,28 @@ input:focus, textarea:focus {
 /* ------------------------------------------- BACK TO TOP BUTTON -------------------------------------------*/
 #backToTop {
   position: fixed;
-  bottom: 30px;
   right: 30px;
-  opacity: 0;
-  pointer-events: none;
-  background-color: #222;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #444;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-  transition: opacity 0.4s ease;
-  z-index: 2000;
+  font-size: 24px;
+  display: none; /* Hidden by default */
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+
+  /* Flexbox centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 #backToTop.show {
   opacity: 1;
