@@ -15,7 +15,6 @@ html, body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  overflow-x: hidden;
 }
 
 html {
@@ -31,8 +30,6 @@ body {
 
 .page-wrapper {
   flex: 1;
-  background-color: inherit;
-  overflow: visible !important;
 }
 
 footer {
@@ -55,33 +52,30 @@ footer {
 .footer-inline,
 .footer-content {
   max-width: 900px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
   box-sizing: border-box;
 }
 
 .menu-image img {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
+  width: 115%;            /* make image bigger */
+  max-width: none;        /* remove any max-width limit */
   display: block;
   margin: 0 auto;
   padding: 0;
+  position: relative;
+  left: 50%;              /* move image 50% to the right */
+  transform: translateX(-50%);  /* pull image back left by 50% of its own width */
 }
 
-.menu-section {
-  max-width: 900px;
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-}
 
 .menu-header,
 .menu-row {
   display: grid;
   grid-template-columns: 1fr 140px 140px;
   align-items: center;
-  padding: 5px 0;
+  padding: 5px 1;
 }
 
 .menu-header {
@@ -105,13 +99,13 @@ footer {
   color: white;
 }
 
-
 .size-column {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 2px;
 }
+
 
 .size-label {
   font-size: 1rem;
@@ -125,12 +119,14 @@ footer {
 
 .dish-name {
   flex: 1;
+  font-size: 1.25rem;
 }
 
 .dish-price {
   text-align: right;
   width: 100%;
   color: #ccc;
+  font-size: 1.25rem;
 }
 
 
@@ -633,81 +629,103 @@ input:focus, textarea:focus {
   outline-offset: 2px;
 }
 
+
 /* ------------------------------------------- CATERING MOBILE WRAPPING ------------------------------------------- */
+
+/* Mobile first */
+.contact-container {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  gap: 20px;
+}
+
+.contact-info,
+.contact-form {
+  background-color: #222;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Desktop override */
+@media (min-width: 601px) {
+  .contact-container {
+    flex-direction: row;         /* Side by side on desktop */
+    align-items: flex-start;     /* Let each box control its height */
+  }
+
+  .contact-info {
+    flex: 0 0 auto;              /* Fixed height and width */
+    width: 300px;                /* Optional: fixed width */
+  }
+
+  .contact-form {
+    flex: 1;                     /* Grow to fill remaining space */
+  }
+}
+
 
 @media (max-width: 600px) {
   .catering-wrapper {
     padding: 0 10px;
-    font-size: 0.75rem; /* Smaller text for mobile */
+    font-size: 0.75rem;
   }
-  
+
   .note-overlay {
-    width: 100px;     /* Smaller size for the note */
-    top: -40px;       /* Adjust vertical position */
-    right: -10px;     /* Adjust horizontal position */
+    width: 100px;
+    top: -40px;
+    right: -10px;
   }
 
-  /* Change menu header and rows from grid to flex with wrapping */
   .menu-header,
-.menu-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto; /* Name | Size | Price */
-  gap: 6px;
-  align-items: start;
-}
+  .menu-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 6px;
+    align-items: start;
+  }
 
+  .dish-name {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    font-size: 1rem;
+  }
 
-.dish-name {
-  overflow-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
-}
-
-.size-column,
-.dish-price {
-  text-align: right;
-  white-space: nowrap;
-  font-size: 0.75rem;
-}
-
-
-
-
-
-  /* Size columns and price adjust accordingly */
   .size-column,
   .dish-price {
     flex: 1 1 60px;
     min-width: 50px;
     text-align: right;
+    white-space: nowrap;
+    font-size: 1rem;
   }
 
-  /* Smaller font and no wrapping for size labels and descriptions */
   .size-label,
   .size-desc {
     display: block;
     white-space: nowrap;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
-  /* Reduce margin between menu sections */
   .menu-section {
     margin-bottom: 15px;
   }
 
-  /* Price notice smaller */
   .price-notice {
     font-size: 0.7rem;
     padding: 0 5px;
   }
 
-  /* Smaller note overlay for mobile */
   .note-overlay {
     max-width: 60px;
   }
+
+  /* ✅ Contact stacked on mobile */
+  .contact-container {
+    flex-direction: column;
+  }
 }
-
-
 
 
 /* BACK TO TOP BUTTON */
