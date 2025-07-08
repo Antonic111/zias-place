@@ -1098,3 +1098,29 @@ input:focus, textarea:focus {
     line-height: 1.4;
   }
 }
+
+/* ------------------------------------------- ABOUT ME IMAGE ADJUSTMENT -------------------------------------------*/
+
+.about-main {
+  max-width: 1050px;
+  margin: 0 auto;
+  position: relative;
+}
+.about-kitchen-img {
+  float: right;
+  width: 350px;
+  max-width: 45vw;
+  margin: 0 0 24px 32px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #0003;
+  display: block;
+}
+@media (max-width: 750px) {
+  .about-kitchen-img {
+    float: none;
+    display: block;
+    margin: 0 auto 24px auto;
+    width: 100%;
+    max-width: 100%;
+  }
+}
