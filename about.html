@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Zia's Place</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="about-page">
+    <header>
+      <div class="container">
+        <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
+        <h1>From my kitchen to your table-with love.</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="catering.html">Catering</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="page-wrapper">
+      <main class="about-main">
+        <!-- Responsive Kitchen Image -->
+        <img
+          src="images/kitchen.png"
+          alt="Rose's Kitchen at Zia's Place"
+          class="about-kitchen-img"
+        />
+        <h2>About Zia's Place</h2>
+        <hr />
+        <div>
+          <p style="font-size: 18px">
+            Hi, I’m Rose – the heart and hands behind Zia’s Place, a home-based
+            catering business serving comforting Italian meals made with love
+            and tradition.
+          </p>
+          <p style="font-size: 18px">
+            Growing up in a big Italian family, I was always surrounded by the
+            warmth of homemade food. From a young age, I helped raise my two
+            younger brothers while juggling school and chores—that’s where my
+            journey in the kitchen began. Those early experiences helped shape
+            me into the strong, resilient woman I am today.
+          </p>
+          <p style="font-size: 18px">
+            With over 35 years of cooking experience, I’ve decided to turn my
+            passion into a purpose: providing delicious, homemade meals for busy
+            families who deserve a break. After years of working full-time in a
+            high-stress job, I know how hard it can be to put a home-cooked meal
+            on the table. That realization—along with my deep love of
+            cooking—led me to start Zia’s Place. My goal is to help ease some of
+            that daily pressure by offering affordable, comforting home made
+            food.
+          </p>
+          <p style="font-size: 18px">
+            As a proud mom of three grown boys with big appetites, my kitchen
+            has always been a place of laughter, love, and generous meals. And
+            as a 12-year cancer survivor, I’ve learned to embrace life fully and
+            follow my passion.
+          </p>
+          <p style="font-size: 18px">
+            At Zia’s Place, you’ll find traditional Italian dishes made with
+            heart, plus a few inspired creations born from my love of
+            experimenting and sharing joy through food. Every meal is prepared
+            with the same care and love I give my own family.
+          </p>
+
+          <div style="display: flex; align-items: flex-start">
+            <div style="flex: 1">
+              <p style="font-size: 18px">
+                Thank you for supporting a small business built on tradition,
+                strength, and heart. I look forward to cooking for you!
+              </p>
+            </div>
+            <img
+              src="images/certification1.jpg"
+              class="certification"
+              style="width: 200px"
+            />
+
+            <img src="images/certification2.jpg" class="certification" />
+          </div>
+
+          <p style="font-size: 18px">With warmth,</p>
+          <p style="font-size: 18px">Rose - Zia’s Place</p>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <div class="footer-inline">
+        <img src="images/phone.png" alt="phone" />
+        <p><a href="tel:+12896513111">(289) 651-3111</a></p>
+        <img src="images/email.png" alt="email" />
+        <p><a href="contact.html">ziasplace2025@gmail.com</a></p>
+      </div>
+    </footer>
+
+    <button id="backToTop" title="Back to top">&#8679;</button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Highlight the active nav link based on current path
+        const path = window.location.pathname.split("/").pop();
+        const links = document.querySelectorAll("nav a");
+        links.forEach((link) => {
+          if (
+            link.getAttribute("href") === path ||
+            (link.getAttribute("href") === "index.html" &&
+              (path === "" || path === "/"))
+          ) {
+            link.classList.add("active");
+            // Hide divider to the left and right of the active link
+            if (link.previousElementSibling) {
+              link.previousElementSibling.classList.add("no-divider-right");
+            }
+            if (link.nextElementSibling) {
+              link.classList.add("no-divider-right");
+            }
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Animate main content appearance
+        const main = document.querySelector("main");
+        if (main) {
+          main.classList.remove("visible"); // remove if already added
+          void main.offsetWidth; // Force reflow to restart animation
+          setTimeout(() => {
+            main.classList.add("visible");
+          }, 10);
+        }
+
+        // Back to top button logic
+        const backToTopButton = document.getElementById("backToTop");
+        const footer = document.querySelector("footer");
+
+        function positionBackToTop() {
+          if (!backToTopButton || !footer) return;
+
+          const footerRect = footer.getBoundingClientRect();
+          if (footerRect.top < window.innerHeight) {
+            const overlap = window.innerHeight - footerRect.top;
+            backToTopButton.style.bottom = `${30 + overlap}px`;
+          } else {
+            backToTopButton.style.bottom = "30px";
+          }
+        }
+
+        if (backToTopButton && footer) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+              backToTopButton.classList.add("show");
+            } else {
+              backToTopButton.classList.remove("show");
+            }
+            positionBackToTop();
+          });
+
+          backToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          });
+
+          window.addEventListener("resize", positionBackToTop);
+
+          // Position button on page load
+          positionBackToTop();
+        }
+      });
+
+      const images = document.querySelectorAll(".certification");
+      let currentOverlay = null;
+      let currentlyEnlarged = null;
+
+      images.forEach((image) => {
+        image.addEventListener("click", () => {
+          const isEnlarged = image.classList.contains("enlarged");
+
+          if (currentlyEnlarged) {
+            currentlyEnlarged.classList.remove("enlarged");
+            currentlyEnlarged = null;
+          }
+          if (currentOverlay) {
+            currentOverlay.remove();
+            currentOverlay = null;
+          }
+
+          if (!isEnlarged) {
+            image.classList.add("enlarged");
+            currentlyEnlarged = image;
+
+            currentOverlay = document.createElement("div");
+            currentOverlay.className = "overlay";
+            document.body.appendChild(currentOverlay);
+
+            currentOverlay.addEventListener("click", () => {
+              image.classList.remove("enlarged");
+              currentOverlay.remove();
+              currentlyEnlarged = null;
+              currentOverlay = null;
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu - Zia's Place</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="menu-page">
+    <header>
+      <div class="container">
+        <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
+        <h1>From my kitchen to your table-with love.</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="menu.html" class="active">Menu</a>
+        <a href="catering.html">Catering</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="page-wrapper">
+      <main>
+        <div class="container">
+          <div class="menu-image">
+            <img src="images/zia-menu.png" alt="Zia's Place Menu" />
+          </div>
+        </div>
+
+        <section class="gallery-section">
+          <hr />
+          <div class="carousel-wrapper">
+            <button class="carousel-btn left" aria-label="Previous slide">
+              &#10094;
+            </button>
+            <div class="carousel-shadow">
+              <div class="carousel" id="carousel">
+                <div class="carousel-track">
+                  <img src="images/slideshow/food1.png" />
+                  <img src="images/slideshow/food2.png" />
+                  <img src="images/slideshow/food3.png" />
+                  <img src="images/slideshow/food4.png" />
+                  <img src="images/slideshow/food5.png" />
+                  <img src="images/slideshow/food6.png" />
+                  <img src="images/slideshow/food7.png" />
+                  <img src="images/slideshow/food8.png" />
+                  <img src="images/slideshow/food9.png" />
+                  <img src="images/slideshow/food10.png" />
+                  <img src="images/slideshow/food11.png" />
+                  <img src="images/slideshow/food12.png" />
+                  <img src="images/slideshow/food13.png" />
+                  <img src="images/slideshow/food14.png" />
+                  <img src="images/slideshow/food15.png" />
+                </div>
+              </div>
+            </div>
+
+            <button class="carousel-btn right" aria-label="Next slide">
+              &#10095;
+            </button>
+
+            <!-- ADD THIS BELOW THE CAROUSEL -->
+            <div class="carousel-dots" id="carouselDots"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <div class="footer-inline">
+        <img src="images/phone.png" alt="phone" />
+        <p><a href="tel:+12896513111">(289) 651-3111</a></p>
+        <img src="images/email.png" alt="email" />
+        <p><a href="contact.html">ziasplace2025@gmail.com</a></p>
+      </div>
+    </footer>
+
+    <button id="backToTop" title="Back to top">&#8679;</button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Navigation active link
+        const path = window.location.pathname.split("/").pop();
+        const links = document.querySelectorAll("nav a");
+        links.forEach((link) => {
+          if (
+            link.getAttribute("href") === path ||
+            (link.getAttribute("href") === "index.html" &&
+              (path === "" || path === "/"))
+          ) {
+            link.classList.add("active");
+            if (link.previousElementSibling) {
+              link.previousElementSibling.classList.add("no-divider-right");
+            }
+            if (link.nextElementSibling) {
+              link.classList.add("no-divider-right");
+            }
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        // Animate main content
+        const main = document.querySelector("main");
+        if (main) {
+          main.classList.remove("visible");
+          void main.offsetWidth;
+          setTimeout(() => {
+            main.classList.add("visible");
+          }, 10);
+        }
+
+        // Carousel setup
+        const track = document.querySelector(".carousel-track");
+        const dotsContainer = document.getElementById("carouselDots");
+        const leftBtn = document.querySelector(".carousel-btn.left");
+        const rightBtn = document.querySelector(".carousel-btn.right");
+
+        if (track && dotsContainer && leftBtn && rightBtn) {
+          const slides = track.children;
+          let currentIndex = 0;
+          let isTransitioning = false;
+
+          // Create dots
+          Array.from(slides).forEach((_, index) => {
+            const dot = document.createElement("span");
+            dot.classList.add("dot");
+            if (index === 0) dot.classList.add("active");
+
+            dot.addEventListener("click", () => {
+              currentIndex = index;
+              moveToSlide(currentIndex);
+            });
+
+            dotsContainer.appendChild(dot);
+          });
+
+          function moveToSlide(index) {
+            if (isTransitioning) return;
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            track.style.transition = "transform 0.5s ease-in-out";
+            track.style.transform = `translateX(-${index * slideWidth}px)`;
+            isTransitioning = true;
+            setTimeout(() => {
+              isTransitioning = false;
+            }, 500);
+            updateDots();
+          }
+
+          function updateDots() {
+            const dots = dotsContainer.querySelectorAll(".dot");
+            dots.forEach((dot) => dot.classList.remove("active"));
+            if (dots[currentIndex]) dots[currentIndex].classList.add("active");
+          }
+
+          // Auto-advance
+          setInterval(() => {
+            if (isTransitioning) return;
+            currentIndex = (currentIndex + 1) % slides.length;
+            moveToSlide(currentIndex);
+          }, 6000);
+
+          // Touch swipe
+          let startX = 0;
+          track.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+          });
+          track.addEventListener("touchend", (e) => {
+            if (isTransitioning) return;
+            const endX = e.changedTouches[0].clientX;
+            if (endX < startX - 50) {
+              currentIndex = (currentIndex + 1) % slides.length;
+              moveToSlide(currentIndex);
+            } else if (endX > startX + 50) {
+              currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+              moveToSlide(currentIndex);
+            }
+          });
+
+          // Keyboard navigation
+          document.addEventListener("keydown", (e) => {
+            if (isTransitioning) return;
+            if (e.key === "ArrowRight") {
+              currentIndex = (currentIndex + 1) % slides.length;
+              moveToSlide(currentIndex);
+            } else if (e.key === "ArrowLeft") {
+              currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+              moveToSlide(currentIndex);
+            }
+          });
+
+          // Button clicks
+          leftBtn.addEventListener("click", () => {
+            if (isTransitioning) return;
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            moveToSlide(currentIndex);
+          });
+          rightBtn.addEventListener("click", () => {
+            if (isTransitioning) return;
+            currentIndex = (currentIndex + 1) % slides.length;
+            moveToSlide(currentIndex);
+          });
+        }
+
+        // Back to Top button
+        const backToTopButton = document.getElementById("backToTop");
+        const footer = document.querySelector("footer");
+
+        function positionBackToTop() {
+          if (!backToTopButton || !footer) return;
+          const footerRect = footer.getBoundingClientRect();
+          if (footerRect.top < window.innerHeight) {
+            const overlap = window.innerHeight - footerRect.top;
+            backToTopButton.style.bottom = `${30 + overlap}px`;
+          } else {
+            backToTopButton.style.bottom = "30px";
+          }
+        }
+
+        if (backToTopButton && footer) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+              backToTopButton.classList.add("show");
+            } else {
+              backToTopButton.classList.remove("show");
+            }
+            positionBackToTop();
+          });
+
+          backToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+          });
+
+          window.addEventListener("resize", positionBackToTop);
+          positionBackToTop();
+        }
+      });
+    </script>
+  </body>
+</html>
