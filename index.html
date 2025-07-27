@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zia's Place - Home</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
+      <h1>From my kitchen to your table-with love.</h1>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="active">Home</a>
+      <a href="menu.html">Menu</a>
+	  <a href="catering.html">Catering</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+  <div class="page-wrapper">
+    <main>
+	<div class="main-content">
+      <h2>Welcome to Zia's Place!</h2>
+      <hr>
+	  <div class="smaller-text">
+      <p>We’re proud to offer homemade Italian catering made with passion and homemade recipes, 
+      perfect for any family gathering or special event. From intimate dinners to festive feasts, 
+      we bring the true flavors of Italy to your table. Let us handle the food, so you can enjoy 
+      every moment with your loved ones, sharing meals just like Zia used to make.</p>
+     
+	 <h2>Why choose Zia’s Place?</h2>
+	 <hr>
+
+<p><strong><span style="color: red;">♥</span> Fresh, Small-Batch Cooking</strong> – We use fresh ingredients and prepare meals in small batches for maximum flavor and care.</p>
+
+<p><strong><span style="color: red;">♥</span> Impeccable Hygiene</strong> – We wear gloves, hairnets, and aprons, and ensure all produce is washed and our kitchen stays spotless.</p>
+
+<p><strong><span style="color: red;">♥</span> Certified & Inspected Kitchen</strong> – Government-approved and trained in safe food handling.</p>
+
+<p><strong><span style="color: red;">♥</span> Homemade Italian Recipes</strong> – Enjoy the real taste of Italy with traditional recipes.</p>
+
+<p><strong><span style="color: red;">♥</span> Affordable & Fair Pricing</strong> – We always try to keep our meals reasonably priced, so good food stays accessible.</p>
+
+<p><strong><span style="color: red;">♥</span> Kind, Personalized Service</strong> – At Zia’s Place, your happiness and a full belly are always our priority.</p>
+
+      <hr>
+	  </div>
+
+      <section class="welcome-row">
+        <div class="welcome-text">
+          <h3>Authentic Flavours</h3>
+          <p>Experience the rich, traditional taste of our handcrafted Italian recipes.</p>
+        </div>
+        <img src="images/Italian Dish 1.jpg" alt="Italian Dish 1">
+      </section>
+
+      <hr>
+
+      <section class="welcome-row">
+        <img src="images/Italian Dish 2.jpg" alt="Italian Dish 2">
+        <div class="welcome-text">
+          <h3>Fresh Ingredients</h3>
+          <p>We use only the freshest local ingredients to ensure quality in every bite.</p>
+        </div>
+      </section>
+
+      <hr>
+
+      <section class="welcome-row">
+        <div class="welcome-text">
+          <h3>Made With Love</h3>
+          <p>Every dish is prepared with care as if we were cooking for family.</p>
+        </div>
+        <img src="images/Italian Dish 3.png" alt="Italian Dish 3">
+      </section>
+	  </div>
+    </main>
+  </div>
+
+<footer>
+  <div class="footer-inline">
+    <img src="images/phone.png" alt="phone">
+    <p><a href="tel:+12896513111">(289) 651-3111</a></p>
+    <img src="images/email.png" alt="email">
+    <p><a href="contact.html">ziasplace2025@gmail.com</a></p>
+  </div>
+</footer>
+
+  <button id="backToTop" aria-label="Back to top" title="Back to top">&#8679;</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Highlight active nav link
+    const path = window.location.pathname.split('/').pop();
+    const links = document.querySelectorAll('nav a');
+    links.forEach(link => {
+      if (
+        link.getAttribute('href') === path ||
+        (link.getAttribute('href') === 'index.html' && (path === '' || path === '/'))
+      ) {
+        link.classList.add('active');
+
+        // Hide divider to the left and right of the active link
+        if (link.previousElementSibling) {
+          link.previousElementSibling.classList.add('no-divider-right');
+        }
+        if (link.nextElementSibling) {
+          link.classList.add('no-divider-right');
+        }
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    // Animate main content visibility
+    const main = document.querySelector('main');
+    if (main) {
+      main.classList.remove('visible');
+      void main.offsetWidth;
+      setTimeout(() => {
+        main.classList.add('visible');
+      }, 10);
+    }
+
+    // Back to top logic
+    const backToTopButton = document.getElementById("backToTop");
+    const footer = document.querySelector("footer");
+
+    function positionBackToTop() {
+      if (!backToTopButton || !footer) return;
+      const footerRect = footer.getBoundingClientRect();
+      if (footerRect.top < window.innerHeight) {
+        const overlap = window.innerHeight - footerRect.top;
+        backToTopButton.style.bottom = `${30 + overlap}px`;
+      } else {
+        backToTopButton.style.bottom = "30px";
+      }
+    }
+
+    function checkBackToTopVisibility() {
+      if (!backToTopButton) return;
+      if (window.scrollY > 1) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+    }
+
+    if (backToTopButton && footer) {
+      // On scroll, update button visibility and position
+      window.addEventListener("scroll", () => {
+        checkBackToTopVisibility();
+        positionBackToTop();
+      });
+
+      // On resize, update position
+      window.addEventListener("resize", positionBackToTop);
+
+      // On page load, check if button should be visible & position it
+      checkBackToTopVisibility();
+      positionBackToTop();
+
+      // Button click scroll to top
+      backToTopButton.addEventListener("click", () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
