@@ -1,217 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - Zia's Place</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <div class="container">
-      <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
-      <h1>From my kitchen to your table-with love.</h1>
+  <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Zia's Place</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img src="images/logo.png" alt="Zia's Place Logo" class="logo" />
+        <h1>From my kitchen to your table-with love.</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="catering.html">Catering</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+
+    <div class="page-wrapper">
+      <main>
+        <h2>Contact Us</h2>
+        <hr />
+        <h4>
+          At Zia's Place, everything is made fresh daily in small batches from
+          our home kitchen. That means there's only so much to go around! Once
+          we sell out for the day, we will post an update on our page.
+        </h4>
+        <h4>
+          To make sure you don't miss out on your favorites, we recommend
+          placing your orders early.
+        </h4>
+        <h4>Thank you for supporting local, homemade food made with love!</h4>
+
+        <section class="hours-section">
+          <h3>Our Hours</h3>
+          <hr />
+          <p>We're open for orders on the following days:</p>
+          <ul class="hours-list">
+            <li><span class="open-day">Friday:</span> 11:00 AM – 7:00 PM</li>
+            <li><span class="open-day">Saturday:</span> 11:00 AM – 7:00 PM</li>
+          </ul>
+          <p>
+            All other days
+            <strong
+              >family / catering orders available with 48 hour notice</strong
+            >. Please contact us in advance to book.
+          </p>
+          <p>
+            <span style="color: #ff6b6b; font-weight: bold">
+              <span
+                style="
+                  align-items: middle;
+                  font-size: 1.2em;
+                  position: relative;
+                  top: 2px;
+                "
+                >💵</span
+              >
+              Cash
+            </span>
+            <span style="color: #fff"> or </span>
+            <span style="color: #ff6b6b; font-weight: bold">
+              <span
+                style="
+                  align-items: middle;
+                  font-size: 1.2em;
+                  position: relative;
+                  top: 2px;
+                "
+                >💳</span
+              >
+              E-transfer
+              <span style="color: #fff; font-weight: normal; font-size: 90%">
+                (ziasplace2025@gmail.com)
+              </span>
+            </span>
+          </p>
+        </section>
+
+        <br />
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Reach Out to Us!</h3>
+            <p>
+              Have questions or want to place an order? We'd love to hear from
+              you!
+            </p>
+            <p>We aim to respond to all messages within 24 hours.</p>
+            <p><em>Feel free to order by text</em></p>
+            <p>
+              <strong>📞 Phone:</strong><br /><a
+                href="tel:+12896513111"
+                style="font-size: 1.1em"
+                >(289) 651-3111</a
+              >
+            </p>
+            <p>
+              <strong>📧 Email:</strong><br /><a
+                href="mailto:ziasplace2025@gmail.com"
+                style="font-size: 1.1em"
+                >ziasplace2025@gmail.com</a
+              >
+            </p>
+
+            <!-- Social icons placed outside the box -->
+            <div class="social-icons">
+              <a
+                href="https://www.instagram.com/zias_place/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="images/instagram.png" alt="Instagram" />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61577088916680&rdid=Wvnd0q90fULnDfPu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16TNiZ4Gfw%2F"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="images/facebook.png" alt="Facebook" />
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <form id="contactForm">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                required
+              />
+
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
+
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Message"
+                required
+              ></textarea>
+
+              <button type="submit">Send Message</button>
+            </form>
+            <p id="formStatus"></p>
+          </div>
+        </div>
+      </main>
     </div>
-  </header>
 
-  <nav>
-    <div class="nav-container">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-	  <a href="catering.html">Catering</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
+    <footer>
+      <div class="footer-inline">
+        <img src="images/phone.png" alt="phone" />
+        <p><a href="tel:+12896513111">(289) 651-3111</a></p>
+        <img src="images/email.png" alt="email" />
+        <p><a href="contact.html">ziasplace2025@gmail.com</a></p>
+      </div>
+    </footer>
 
-  <div class="page-wrapper">
-<main>
-  <h2>Contact Us</h2>
-  <hr />
-<h4>At Zia's Place, everything is made fresh daily in small batches from our home kitchen. That means there's only so much to go around! Once we sell out for the day, we will post an update on our page.</h4>
-<h4>To make sure you don't miss out on your favorites, we recommend placing your orders early.</h4>
-<h4>Thank you for supporting local, homemade food made with love!</h4>
+    <button id="backToTop" title="Back to top">&#8679;</button>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Make main visible with animation
+        const main = document.querySelector("main");
+        if (main) {
+          main.classList.remove("visible");
+          void main.offsetWidth;
+          setTimeout(() => {
+            main.classList.add("visible");
+          }, 10);
+        }
 
-<section class="hours-section">
-  <h3>Our Hours</h3>
-  <hr />
-  <p>We're open for orders on the following days:</p>
-  <ul class="hours-list">
-    <li><span class="open-day">Friday:</span> 11:00 AM – 7:00 PM</li>
-    <li><span class="open-day">Saturday:</span> 11:00 AM – 7:00 PM</li>
-  </ul>
-  <p>All other days are available for <strong>catering orders only</strong>. Please contact us in advance to book.</p>
-<p>
-  <span style="color: #ff6b6b; font-weight: bold;">
-    <span style="align-items: middle; font-size: 1.2em; position: relative; top: 2px;">💵</span> Cash
-  </span>
-  <span style="color: #fff;"> or </span>
-  <span style="color: #ff6b6b; font-weight: bold;">
-    <span style="align-items: middle; font-size: 1.2em; position: relative; top: 2px;">💳</span> E-transfer
-<span style="color: #fff; font-weight: normal; font-size: 90%;">
-  (ziasplace2025@gmail.com)
-</span>
+        // Highlight active nav link and hide appropriate dividers
+        const path = window.location.pathname.split("/").pop();
+        document.querySelectorAll("nav a").forEach((link) => {
+          const href = link.getAttribute("href");
+          if (
+            href === path ||
+            (href === "index.html" && (path === "" || path === "/"))
+          ) {
+            link.classList.add("active");
 
-  </span>
-</p>
+            // Hide right divider of the previous link (left side of this one)
+            if (link.previousElementSibling) {
+              link.previousElementSibling.classList.add("no-divider-right");
+            }
 
-</section>
-
-  <br>
-<div class="contact-container">
-  <div class="contact-info">
-    <h3>Reach Out to Us!</h3>
-    <p>Have questions or want to place an order? We'd love to hear from you!</p>
-    <p>We aim to respond to all messages within 24 hours.</p>
-    <p><em>Feel free to order by text</em></p>
-    <p><strong>📞 Phone:</strong><br><a href="tel:+12896513111" style="font-size: 1.1em;">(289) 651-3111</a></p>
-    <p><strong>📧 Email:</strong><br><a href="mailto:ziasplace2025@gmail.com" style="font-size: 1.1em;">ziasplace2025@gmail.com</a></p>
-
-  <!-- Social icons placed outside the box -->
-  <div class="social-icons">
-    <a href="https://www.instagram.com/zias_place/" target="_blank" rel="noopener">
-      <img src="images/instagram.png" alt="Instagram" />
-    </a>
-    <a href="https://www.facebook.com/profile.php?id=61577088916680&rdid=Wvnd0q90fULnDfPu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16TNiZ4Gfw%2F" target="_blank" rel="noopener">
-      <img src="images/facebook.png" alt="Facebook" />
-    </a>
-  </div>
-</div>
-
-    <div class="contact-form">
-      <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Name" required />
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Email" required />
-
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" placeholder="Message" required></textarea>
-
-        <button type="submit">Send Message</button>
-      </form>
-      <p id="formStatus"></p>
-    </div>
-  </div>
-</main>
-
-
-  </div>
-
-<footer>
-  <div class="footer-inline">
-    <img src="images/phone.png" alt="phone">
-    <p><a href="tel:+12896513111">(289) 651-3111</a></p>
-    <img src="images/email.png" alt="email">
-    <p><a href="contact.html">ziasplace2025@gmail.com</a></p>
-  </div>
-</footer>
-
-  <button id="backToTop" title="Back to top">&#8679;</button>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Make main visible with animation
-    const main = document.querySelector('main');
-    if (main) {
-      main.classList.remove('visible');
-      void main.offsetWidth;
-      setTimeout(() => {
-        main.classList.add('visible');
-      }, 10);
-    }
-	
-// Highlight active nav link and hide appropriate dividers
-const path = window.location.pathname.split("/").pop();
-document.querySelectorAll("nav a").forEach(link => {
-  const href = link.getAttribute("href");
-  if (href === path || (href === "index.html" && (path === "" || path === "/"))) {
-    link.classList.add("active");
-
-    // Hide right divider of the previous link (left side of this one)
-    if (link.previousElementSibling) {
-      link.previousElementSibling.classList.add("no-divider-right");
-    }
-
-    // Hide right divider of this link (right side of this one)
-    if (link.nextElementSibling) {
-      link.classList.add("no-divider-right");
-    }
-  } else {
-    link.classList.remove("active");
-    link.classList.remove("no-divider-right");
-  }
-});
-
-
-    // Back to top button logic
-    const backToTopButton = document.getElementById("backToTop");
-    const footer = document.querySelector("footer");
-
-    function positionBackToTop() {
-      const footerRect = footer.getBoundingClientRect();
-      if (footerRect.top < window.innerHeight) {
-        const overlap = window.innerHeight - footerRect.top;
-        backToTopButton.style.bottom = `${30 + overlap}px`;
-      } else {
-        backToTopButton.style.bottom = "30px";
-      }
-    }
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        backToTopButton.classList.add("show");
-      } else {
-        backToTopButton.classList.remove("show");
-      }
-      positionBackToTop();
-    });
-
-    backToTopButton.addEventListener("click", () => {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    });
-
-    window.addEventListener("resize", positionBackToTop);
-    positionBackToTop();
-
-    // EmailJS initialization
-    emailjs.init('krTgbNFN4POZQm2rt');
-
-    const form = document.getElementById('contactForm');
-    const statusMessage = document.getElementById('formStatus');
-
-    function showPopup(message) {
-      const popup = document.getElementById('popupNotification');
-      popup.textContent = message;
-      popup.classList.add('show');
-
-      setTimeout(() => {
-        popup.classList.remove('show');
-      }, 8000);
-    }
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      emailjs.sendForm('service_t8e6xvw', 'template_bimqk96', this)
-        .then(() => {
-          statusMessage.textContent = "";
-          showPopup("Email sent! Thank you.");
-          form.reset();
-        }, (error) => {
-          showPopup("Oops! Something went wrong. Please try again.");
-          console.error('EmailJS error:', error);
+            // Hide right divider of this link (right side of this one)
+            if (link.nextElementSibling) {
+              link.classList.add("no-divider-right");
+            }
+          } else {
+            link.classList.remove("active");
+            link.classList.remove("no-divider-right");
+          }
         });
-    });
-  });
-</script>
 
-<div id="popupNotification" class="popup-hidden">
-  Your email has been sent!
-</div>
+        // Back to top button logic
+        const backToTopButton = document.getElementById("backToTop");
+        const footer = document.querySelector("footer");
 
+        function positionBackToTop() {
+          const footerRect = footer.getBoundingClientRect();
+          if (footerRect.top < window.innerHeight) {
+            const overlap = window.innerHeight - footerRect.top;
+            backToTopButton.style.bottom = `${30 + overlap}px`;
+          } else {
+            backToTopButton.style.bottom = "30px";
+          }
+        }
 
-</body>
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 100) {
+            backToTopButton.classList.add("show");
+          } else {
+            backToTopButton.classList.remove("show");
+          }
+          positionBackToTop();
+        });
+
+        backToTopButton.addEventListener("click", () => {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        });
+
+        window.addEventListener("resize", positionBackToTop);
+        positionBackToTop();
+
+        // EmailJS initialization
+        emailjs.init("krTgbNFN4POZQm2rt");
+
+        const form = document.getElementById("contactForm");
+        const statusMessage = document.getElementById("formStatus");
+
+        function showPopup(message) {
+          const popup = document.getElementById("popupNotification");
+          popup.textContent = message;
+          popup.classList.add("show");
+
+          setTimeout(() => {
+            popup.classList.remove("show");
+          }, 8000);
+        }
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          emailjs.sendForm("service_t8e6xvw", "template_bimqk96", this).then(
+            () => {
+              statusMessage.textContent = "";
+              showPopup("Email sent! Thank you.");
+              form.reset();
+            },
+            (error) => {
+              showPopup("Oops! Something went wrong. Please try again.");
+              console.error("EmailJS error:", error);
+            }
+          );
+        });
+      });
+    </script>
+
+    <div id="popupNotification" class="popup-hidden">
+      Your email has been sent!
+    </div>
+  </body>
 </html>
